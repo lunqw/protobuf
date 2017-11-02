@@ -194,7 +194,7 @@ void ImmutableMessageLiteGenerator::Generate(io::Printer* printer) {
   } else {
     printer->Print(variables,
         "public $static$final class $classname$ extends\n"
-        "    com.google.protobuf.GeneratedMessageLite<\n"
+        "    com.yy.mobile.plugin.greedyface.BaseProtoBufMessageLite<\n"
         "        $classname$, $classname$.Builder> implements\n"
         "    $extra_interfaces$\n"
         "    $classname$OrBuilder {\n");
@@ -327,7 +327,7 @@ void ImmutableMessageLiteGenerator::Generate(io::Printer* printer) {
 
   GenerateMessageSerializationMethods(printer);
 
-  GenerateParseFromMethods(printer);
+  // GenerateParseFromMethods(printer);
   GenerateBuilder(printer);
 
   if (HasRequiredFields(descriptor_)) {
@@ -342,6 +342,11 @@ void ImmutableMessageLiteGenerator::Generate(io::Printer* printer) {
     "protected final Object dynamicMethod(\n"
     "    com.google.protobuf.GeneratedMessageLite.MethodToInvoke method,\n"
     "    Object arg0, Object arg1) {\n"
+    "  if (arg0 != null && arg0 instanceof com.yy.mobile.yyprotocol.core.Uint32) {\n"
+    "    return com.yy.mobile.yyprotocol.core.Uint32.toUInt(Type.max_VALUE);\n"
+    "  } else if (arg1 != null && arg1 instanceof com.yy.mobile.yyprotocol.core.Uint32) {\n"
+    "    return com.yy.mobile.yyprotocol.core.Uint32.toUInt(Type.min_VALUE);\n"
+    "  }\n"
     "  switch (method) {\n"
     "    case NEW_MUTABLE_INSTANCE: {\n"
     "      return new $classname$();\n"
@@ -1060,7 +1065,7 @@ GenerateExtensionRegistrationCode(io::Printer* printer) {
 void ImmutableMessageLiteGenerator::
 GenerateConstructor(io::Printer* printer) {
   printer->Print(
-      "private $classname$() {\n",
+      "public $classname$() {\n",
       "classname", descriptor_->name());
   printer->Indent();
 
