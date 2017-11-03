@@ -285,21 +285,21 @@ GenerateMembers(io::Printer* printer) const {
       "  }\n"
       "  return $name$_;\n"
       "}\n");
-  printer->Print(
-      variables_,
-      "$deprecation$\n"
-      "public int get$capitalized_name$Count() {\n"
-      "  return internalGet$capitalized_name$().size();\n"
-      "}\n");
-  WriteFieldDocComment(printer, descriptor_);
-  printer->Print(
-      variables_,
-      "$deprecation$\n"
-      "public boolean contains$capitalized_name$(\n"
-      "    $key_type$ key) {\n"
-      "  $key_null_check$\n"
-      "  return internalGet$capitalized_name$().containsKey(key);\n"
-      "}\n");
+  //  printer->Print(
+  //      variables_,
+  //      "$deprecation$\n"
+  //      "public int get$capitalized_name$Count() {\n"
+  //      "  return internalGet$capitalized_name$().size();\n"
+  //      "}\n");
+  //  WriteFieldDocComment(printer, descriptor_);
+  //  printer->Print(
+  //      variables_,
+  //      "$deprecation$\n"
+  //      "public boolean contains$capitalized_name$(\n"
+  //      "    $key_type$ key) {\n"
+  //      "  $key_null_check$\n"
+  //      "  return internalGet$capitalized_name$().containsKey(key);\n"
+  //      "}\n");
   if (GetJavaType(ValueField(descriptor_)) == JAVATYPE_ENUM) {
     printer->Print(
         variables_,
@@ -309,16 +309,16 @@ GenerateMembers(io::Printer* printer) const {
         "        com.google.protobuf.Internal.MapAdapter.newEnumConverter(\n"
         "            $value_enum_type$.internalGetValueMap(),\n"
         "            $unrecognized_value$);\n");
-    printer->Print(
-        variables_,
-        "/**\n"
-        " * Use {@link #get$capitalized_name$Map()} instead.\n"
-        " */\n"
-        "@java.lang.Deprecated\n"
-        "public java.util.Map<$boxed_key_type$, $value_enum_type$>\n"
-        "get$capitalized_name$() {\n"
-        "  return get$capitalized_name$Map();\n"
-        "}\n");
+    //    printer->Print(
+    //        variables_,
+    //        "/**\n"
+    //        " * Use {@link #get$capitalized_name$Map()} instead.\n"
+    //        " */\n"
+    //        "@java.lang.Deprecated\n"
+    //        "public java.util.Map<$boxed_key_type$, $value_enum_type$>\n"
+    //        "get$capitalized_name$() {\n"
+    //        "  return get$capitalized_name$Map();\n"
+    //        "}\n");
     WriteFieldDocComment(printer, descriptor_);
     printer->Print(
         variables_,
@@ -331,91 +331,91 @@ GenerateMembers(io::Printer* printer) const {
         "            internalGet$capitalized_name$(),\n"
         "            $name$ValueConverter));\n"
         "}\n");
-    WriteFieldDocComment(printer, descriptor_);
-    printer->Print(
-        variables_,
-        "$deprecation$\n"
-        "public $value_enum_type$ get$capitalized_name$OrDefault(\n"
-        "    $key_type$ key,\n"
-        "    $value_enum_type$ defaultValue) {\n"
-        "  $key_null_check$\n"
-        "  java.util.Map<$boxed_key_type$, $boxed_value_type$> map =\n"
-        "      internalGet$capitalized_name$();\n"
-        "  return map.containsKey(key)\n"
-        "         ? $name$ValueConverter.doForward(map.get(key))\n"
-        "         : defaultValue;\n"
-        "}\n");
-    WriteFieldDocComment(printer, descriptor_);
-    printer->Print(
-        variables_,
-        "$deprecation$\n"
-        "public $value_enum_type$ get$capitalized_name$OrThrow(\n"
-        "    $key_type$ key) {\n"
-        "  $key_null_check$\n"
-        "  java.util.Map<$boxed_key_type$, $boxed_value_type$> map =\n"
-        "      internalGet$capitalized_name$();\n"
-        "  if (!map.containsKey(key)) {\n"
-        "    throw new java.lang.IllegalArgumentException();\n"
-        "  }\n"
-        "  return $name$ValueConverter.doForward(map.get(key));\n"
-        "}\n");
-    if (SupportUnknownEnumValue(descriptor_->file())) {
-      printer->Print(
-          variables_,
-          "/**\n"
-          " * Use {@link #get$capitalized_name$ValueMap()} instead.\n"
-          " */\n"
-          "@java.lang.Deprecated\n"
-          "public java.util.Map<$boxed_key_type$, $boxed_value_type$>\n"
-          "get$capitalized_name$Value() {\n"
-          "  return get$capitalized_name$ValueMap();\n"
-          "}\n");
-      WriteFieldDocComment(printer, descriptor_);
-      printer->Print(
-          variables_,
-          "$deprecation$\n"
-          "public java.util.Map<$boxed_key_type$, $boxed_value_type$>\n"
-          "get$capitalized_name$ValueMap() {\n"
-          "  return java.util.Collections.unmodifiableMap(\n"
-          "      internalGet$capitalized_name$());\n"
-          "}\n");
-      WriteFieldDocComment(printer, descriptor_);
-      printer->Print(
-          variables_,
-          "$deprecation$\n"
-          "public $value_type$ get$capitalized_name$ValueOrDefault(\n"
-          "    $key_type$ key,\n"
-          "    $value_type$ defaultValue) {\n"
-          "  $key_null_check$\n"
-          "  java.util.Map<$boxed_key_type$, $boxed_value_type$> map =\n"
-          "      internalGet$capitalized_name$();\n"
-          "  return map.containsKey(key) ? map.get(key) : defaultValue;\n"
-          "}\n");
-      WriteFieldDocComment(printer, descriptor_);
-      printer->Print(
-          variables_,
-          "$deprecation$\n"
-          "public $value_type$ get$capitalized_name$ValueOrThrow(\n"
-          "    $key_type$ key) {\n"
-          "  $key_null_check$\n"
-          "  java.util.Map<$boxed_key_type$, $boxed_value_type$> map =\n"
-          "      internalGet$capitalized_name$();\n"
-          "  if (!map.containsKey(key)) {\n"
-          "    throw new java.lang.IllegalArgumentException();\n"
-          "  }\n"
-          "  return map.get(key);\n"
-          "}\n");
-    }
+  //    WriteFieldDocComment(printer, descriptor_);
+  //    printer->Print(
+  //        variables_,
+  //        "$deprecation$\n"
+  //        "public $value_enum_type$ get$capitalized_name$OrDefault(\n"
+  //        "    $key_type$ key,\n"
+  //        "    $value_enum_type$ defaultValue) {\n"
+  //        "  $key_null_check$\n"
+  //        "  java.util.Map<$boxed_key_type$, $boxed_value_type$> map =\n"
+  //        "      internalGet$capitalized_name$();\n"
+  //        "  return map.containsKey(key)\n"
+  //        "         ? $name$ValueConverter.doForward(map.get(key))\n"
+  //        "         : defaultValue;\n"
+  //        "}\n");
+  //    WriteFieldDocComment(printer, descriptor_);
+  //    printer->Print(
+  //        variables_,
+  //        "$deprecation$\n"
+  //        "public $value_enum_type$ get$capitalized_name$OrThrow(\n"
+  //        "    $key_type$ key) {\n"
+  //        "  $key_null_check$\n"
+  //        "  java.util.Map<$boxed_key_type$, $boxed_value_type$> map =\n"
+  //        "      internalGet$capitalized_name$();\n"
+  //        "  if (!map.containsKey(key)) {\n"
+  //        "    throw new java.lang.IllegalArgumentException();\n"
+  //        "  }\n"
+  //        "  return $name$ValueConverter.doForward(map.get(key));\n"
+  //        "}\n");
+  //    if (SupportUnknownEnumValue(descriptor_->file())) {
+  //      printer->Print(
+  //          variables_,
+  //          "/**\n"
+  //          " * Use {@link #get$capitalized_name$ValueMap()} instead.\n"
+  //          " */\n"
+  //          "@java.lang.Deprecated\n"
+  //          "public java.util.Map<$boxed_key_type$, $boxed_value_type$>\n"
+  //          "get$capitalized_name$Value() {\n"
+  //          "  return get$capitalized_name$ValueMap();\n"
+  //          "}\n");
+  //      WriteFieldDocComment(printer, descriptor_);
+  //      printer->Print(
+  //          variables_,
+  //          "$deprecation$\n"
+  //          "public java.util.Map<$boxed_key_type$, $boxed_value_type$>\n"
+  //          "get$capitalized_name$ValueMap() {\n"
+  //          "  return java.util.Collections.unmodifiableMap(\n"
+  //          "      internalGet$capitalized_name$());\n"
+  //          "}\n");
+  //      WriteFieldDocComment(printer, descriptor_);
+  //      printer->Print(
+  //          variables_,
+  //          "$deprecation$\n"
+  //          "public $value_type$ get$capitalized_name$ValueOrDefault(\n"
+  //          "    $key_type$ key,\n"
+  //          "    $value_type$ defaultValue) {\n"
+  //          "  $key_null_check$\n"
+  //          "  java.util.Map<$boxed_key_type$, $boxed_value_type$> map =\n"
+  //          "      internalGet$capitalized_name$();\n"
+  //          "  return map.containsKey(key) ? map.get(key) : defaultValue;\n"
+  //          "}\n");
+  //      WriteFieldDocComment(printer, descriptor_);
+  //      printer->Print(
+  //          variables_,
+  //          "$deprecation$\n"
+  //          "public $value_type$ get$capitalized_name$ValueOrThrow(\n"
+  //          "    $key_type$ key) {\n"
+  //          "  $key_null_check$\n"
+  //          "  java.util.Map<$boxed_key_type$, $boxed_value_type$> map =\n"
+  //          "      internalGet$capitalized_name$();\n"
+  //          "  if (!map.containsKey(key)) {\n"
+  //          "    throw new java.lang.IllegalArgumentException();\n"
+  //          "  }\n"
+  //          "  return map.get(key);\n"
+  //          "}\n");
+  //    }
   } else {
-    printer->Print(
-        variables_,
-        "/**\n"
-        " * Use {@link #get$capitalized_name$Map()} instead.\n"
-        " */\n"
-        "@java.lang.Deprecated\n"
-        "public java.util.Map<$type_parameters$> get$capitalized_name$() {\n"
-        "  return get$capitalized_name$Map();\n"
-        "}\n");
+    //    printer->Print(
+    //        variables_,
+    //        "/**\n"
+    //        " * Use {@link #get$capitalized_name$Map()} instead.\n"
+    //        " */\n"
+    //        "@java.lang.Deprecated\n"
+    //        "public java.util.Map<$type_parameters$> get$capitalized_name$() {\n"
+    //        "  return get$capitalized_name$Map();\n"
+    //        "}\n");
     WriteFieldDocComment(printer, descriptor_);
     printer->Print(
         variables_,
@@ -424,32 +424,32 @@ GenerateMembers(io::Printer* printer) const {
         "  return java.util.Collections.unmodifiableMap(\n"
         "      internalGet$capitalized_name$());\n"
         "}\n");
-    WriteFieldDocComment(printer, descriptor_);
-    printer->Print(
-        variables_,
-        "$deprecation$\n"
-        "public $value_type$ get$capitalized_name$OrDefault(\n"
-        "    $key_type$ key,\n"
-        "    $value_type$ defaultValue) {\n"
-        "  $key_null_check$\n"
-        "  java.util.Map<$type_parameters$> map =\n"
-        "      internalGet$capitalized_name$();\n"
-        "  return map.containsKey(key) ? map.get(key) : defaultValue;\n"
-        "}\n");
-    WriteFieldDocComment(printer, descriptor_);
-    printer->Print(
-        variables_,
-        "$deprecation$\n"
-        "public $value_type$ get$capitalized_name$OrThrow(\n"
-        "    $key_type$ key) {\n"
-        "  $key_null_check$\n"
-        "  java.util.Map<$type_parameters$> map =\n"
-        "      internalGet$capitalized_name$();\n"
-        "  if (!map.containsKey(key)) {\n"
-        "    throw new java.lang.IllegalArgumentException();\n"
-        "  }\n"
-        "  return map.get(key);\n"
-        "}\n");
+  //    WriteFieldDocComment(printer, descriptor_);
+  //    printer->Print(
+  //        variables_,
+  //        "$deprecation$\n"
+  //        "public $value_type$ get$capitalized_name$OrDefault(\n"
+  //        "    $key_type$ key,\n"
+  //        "    $value_type$ defaultValue) {\n"
+  //        "  $key_null_check$\n"
+  //        "  java.util.Map<$type_parameters$> map =\n"
+  //        "      internalGet$capitalized_name$();\n"
+  //        "  return map.containsKey(key) ? map.get(key) : defaultValue;\n"
+  //        "}\n");
+  //    WriteFieldDocComment(printer, descriptor_);
+  //    printer->Print(
+  //        variables_,
+  //        "$deprecation$\n"
+  //        "public $value_type$ get$capitalized_name$OrThrow(\n"
+  //        "    $key_type$ key) {\n"
+  //        "  $key_null_check$\n"
+  //        "  java.util.Map<$type_parameters$> map =\n"
+  //        "      internalGet$capitalized_name$();\n"
+  //        "  if (!map.containsKey(key)) {\n"
+  //        "    throw new java.lang.IllegalArgumentException();\n"
+  //        "  }\n"
+  //        "  return map.get(key);\n"
+  //        "}\n");
   }
 
   // Generate private setters for the builder to proxy into.
@@ -457,27 +457,27 @@ GenerateMembers(io::Printer* printer) const {
     WriteFieldDocComment(printer, descriptor_);
     printer->Print(
         variables_,
-        "private java.util.Map<$boxed_key_type$, $value_enum_type$>\n"
+        "public java.util.Map<$boxed_key_type$, $value_enum_type$>\n"
         "getMutable$capitalized_name$Map() {\n"
         "  return new com.google.protobuf.Internal.MapAdapter<\n"
         "      $boxed_key_type$, $value_enum_type$, java.lang.Integer>(\n"
         "          internalGetMutable$capitalized_name$(),\n"
         "          $name$ValueConverter);\n"
         "}\n");
-    if (SupportUnknownEnumValue(descriptor_->file())) {
-      WriteFieldDocComment(printer, descriptor_);
-      printer->Print(
-          variables_,
-          "private java.util.Map<$boxed_key_type$, $boxed_value_type$>\n"
-          "getMutable$capitalized_name$ValueMap() {\n"
-          "  return internalGetMutable$capitalized_name$();\n"
-          "}\n");
-    }
+  //    if (SupportUnknownEnumValue(descriptor_->file())) {
+  //      WriteFieldDocComment(printer, descriptor_);
+  //      printer->Print(
+  //          variables_,
+  //          "private java.util.Map<$boxed_key_type$, $boxed_value_type$>\n"
+  //          "getMutable$capitalized_name$ValueMap() {\n"
+  //          "  return internalGetMutable$capitalized_name$();\n"
+  //          "}\n");
+  //    }
   } else {
     WriteFieldDocComment(printer, descriptor_);
     printer->Print(
         variables_,
-        "private java.util.Map<$type_parameters$>\n"
+        "public java.util.Map<$type_parameters$>\n"
         "getMutable$capitalized_name$Map() {\n"
         "  return internalGetMutable$capitalized_name$();\n"
         "}\n");

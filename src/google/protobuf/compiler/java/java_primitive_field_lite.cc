@@ -233,7 +233,7 @@ GenerateMembers(io::Printer* printer) const {
 
   WriteFieldDocComment(printer, descriptor_);
   printer->Print(variables_,
-    "private void set$capitalized_name$($type$ value) {\n"
+    "public void set$capitalized_name$($type$ value) {\n"
     "$null_check$"
     "  $set_has_field_bit_message$\n"
     "  $name$_ = value;\n"
@@ -241,7 +241,7 @@ GenerateMembers(io::Printer* printer) const {
 
   WriteFieldDocComment(printer, descriptor_);
   printer->Print(variables_,
-    "private void clear$capitalized_name$() {\n"
+    "public void clear$capitalized_name$() {\n"
     "  $clear_has_field_bit_message$\n");
   JavaType type = GetJavaType(descriptor_);
   if (type == JAVATYPE_STRING || type == JAVATYPE_BYTES) {

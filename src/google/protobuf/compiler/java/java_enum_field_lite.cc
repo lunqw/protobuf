@@ -167,13 +167,13 @@ GenerateMembers(io::Printer* printer) const {
       "  return $get_has_field_bit_message$;\n"
       "}\n");
   }
-  if (SupportUnknownEnumValue(descriptor_->file())) {
-    WriteFieldDocComment(printer, descriptor_);
-    printer->Print(variables_,
-      "$deprecation$public int get$capitalized_name$Value() {\n"
-      "  return $name$_;\n"
-      "}\n");
-  }
+  //  if (SupportUnknownEnumValue(descriptor_->file())) {
+  //    WriteFieldDocComment(printer, descriptor_);
+  //    printer->Print(variables_,
+  //      "$deprecation$public int get$capitalized_name$Value() {\n"
+  //      "  return $name$_;\n"
+  //      "}\n");
+  //  }
   WriteFieldDocComment(printer, descriptor_);
   printer->Print(variables_,
     "$deprecation$public $type$ get$capitalized_name$() {\n"
@@ -182,17 +182,17 @@ GenerateMembers(io::Printer* printer) const {
     "}\n");
 
   // Generate private setters for the builder to proxy into.
-  if (SupportUnknownEnumValue(descriptor_->file())) {
-    WriteFieldDocComment(printer, descriptor_);
-    printer->Print(variables_,
-      "private void set$capitalized_name$Value(int value) {\n"
-      "  $set_has_field_bit_message$"
-      "  $name$_ = value;\n"
-      "}\n");
-  }
+  //  if (SupportUnknownEnumValue(descriptor_->file())) {
+  //    WriteFieldDocComment(printer, descriptor_);
+  //    printer->Print(variables_,
+  //      "private void set$capitalized_name$Value(int value) {\n"
+  //      "  $set_has_field_bit_message$"
+  //      "  $name$_ = value;\n"
+  //      "}\n");
+  //  }
   WriteFieldDocComment(printer, descriptor_);
   printer->Print(variables_,
-    "private void set$capitalized_name$($type$ value) {\n"
+    "public void set$capitalized_name$($type$ value) {\n"
     "  if (value == null) {\n"
     "    throw new NullPointerException();\n"
     "  }\n"
@@ -201,7 +201,7 @@ GenerateMembers(io::Printer* printer) const {
     "}\n");
   WriteFieldDocComment(printer, descriptor_);
   printer->Print(variables_,
-    "private void clear$capitalized_name$() {\n"
+    "public void clear$capitalized_name$() {\n"
     "  $clear_has_field_bit_message$\n"
     "  $name$_ = $default_number$;\n"
     "}\n");

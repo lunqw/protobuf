@@ -120,49 +120,50 @@ int ImmutableMessageLiteGenerator::GenerateStaticVariableInitializers(
 // ===================================================================
 
 void ImmutableMessageLiteGenerator::GenerateInterface(io::Printer* printer) {
-  MaybePrintGeneratedAnnotation(context_, printer, descriptor_,
-                                /* immutable = */ true, "OrBuilder");
-  if (descriptor_->extension_range_count() > 0) {
-    printer->Print(
-        "public interface $classname$OrBuilder$idend$ extends \n"
-        "    $extra_interfaces$\n"
-        "     com.google.protobuf.GeneratedMessageLite.\n"
-        "          ExtendableMessageOrBuilder<\n"
-        "              $classname$, $classname$.Builder> {\n",
-        "extra_interfaces", ExtraMessageOrBuilderInterfaces(descriptor_),
-        "classname", descriptor_->name(),
-        "idend", "");
-  } else {
-    printer->Print(
-        "public interface $classname$OrBuilder$idend$ extends\n"
-        "    $extra_interfaces$\n"
-        "    com.google.protobuf.MessageLiteOrBuilder {\n",
-        "extra_interfaces", ExtraMessageOrBuilderInterfaces(descriptor_),
-        "classname", descriptor_->name(),
-        "idend", "");
-  }
-  printer->Annotate("classname", "idend", descriptor_);
+    //  MaybePrintGeneratedAnnotation(context_, printer, descriptor_,
+    //                                /* immutable = */ true, "OrBuilder");
+    //  if (descriptor_->extension_range_count() > 0) {
+    //    printer->Print(
+    //        "public interface $classname$OrBuilder$idend$ extends \n"
+    //        "    $extra_interfaces$\n"
+    //        "     com.google.protobuf.GeneratedMessageLite.\n"
+    //        "          ExtendableMessageOrBuilder<\n"
+    //        "              $classname$, $classname$.Builder> {\n",
+    //        "extra_interfaces", ExtraMessageOrBuilderInterfaces(descriptor_),
+    //        "classname", descriptor_->name(),
+    //        "idend", "");
+    //  } else {
+    //    printer->Print(
+    //        "public interface $classname$OrBuilder$idend$ extends\n"
+    //        "    $extra_interfaces$\n"
+    //        "    com.google.protobuf.MessageLiteOrBuilder {\n",
+    //        "extra_interfaces", ExtraMessageOrBuilderInterfaces(descriptor_),
+    //        "classname", descriptor_->name(),
+    //        "idend", "");
+    //  }
+    //  printer->Annotate("classname", "idend", descriptor_);
+    //
+    //  printer->Indent();
+    //    for (int i = 0; i < descriptor_->field_count(); i++) {
+    //      printer->Print("\n");
+    //      field_generators_.get(descriptor_->field(i))
+    //                       .GenerateInterfaceMembers(printer);
+    //    }
+    //    for (int i = 0; i < descriptor_->oneof_decl_count(); i++) {
+    //      printer->Print(
+    //          "\n"
+    //          "public $classname$.$oneof_capitalized_name$Case "
+    //          "get$oneof_capitalized_name$Case();\n",
+    //          "oneof_capitalized_name",
+    //          context_->GetOneofGeneratorInfo(
+    //              descriptor_->oneof_decl(i))->capitalized_name,
+    //          "classname",
+    //          context_->GetNameResolver()->GetImmutableClassName(descriptor_));
+    //    }
+    //  printer->Outdent();
+    //
+    //  printer->Print("}\n");
 
-  printer->Indent();
-    for (int i = 0; i < descriptor_->field_count(); i++) {
-      printer->Print("\n");
-      field_generators_.get(descriptor_->field(i))
-                       .GenerateInterfaceMembers(printer);
-    }
-    for (int i = 0; i < descriptor_->oneof_decl_count(); i++) {
-      printer->Print(
-          "\n"
-          "public $classname$.$oneof_capitalized_name$Case "
-          "get$oneof_capitalized_name$Case();\n",
-          "oneof_capitalized_name",
-          context_->GetOneofGeneratorInfo(
-              descriptor_->oneof_decl(i))->capitalized_name,
-          "classname",
-          context_->GetNameResolver()->GetImmutableClassName(descriptor_));
-    }
-  printer->Outdent();
-
-  printer->Print("}\n");
 }
 
 // ===================================================================
@@ -194,10 +195,7 @@ void ImmutableMessageLiteGenerator::Generate(io::Printer* printer) {
   } else {
     printer->Print(variables,
         "public $static$final class $classname$ extends\n"
-        "    com.yy.mobile.plugin.greedyface.BaseProtoBufMessageLite<\n"
-        "        $classname$, $classname$.Builder> implements\n"
-        "    $extra_interfaces$\n"
-        "    $classname$OrBuilder {\n");
+        "    com.yymobile.core.ent.protos.BaseProtoBufMessageLite {\n");
 
     builder_type = "com.google.protobuf.GeneratedMessageLite.Builder";
   }
@@ -318,9 +316,9 @@ void ImmutableMessageLiteGenerator::Generate(io::Printer* printer) {
 
   // Fields
   for (int i = 0; i < descriptor_->field_count(); i++) {
-    printer->Print("public static final int $constant_name$ = $number$;\n",
-      "constant_name", FieldConstantName(descriptor_->field(i)),
-      "number", SimpleItoa(descriptor_->field(i)->number()));
+//    printer->Print("public static final int $constant_name$ = $number$;\n",
+//      "constant_name", FieldConstantName(descriptor_->field(i)),
+//      "number", SimpleItoa(descriptor_->field(i)->number()));
     field_generators_.get(descriptor_->field(i)).GenerateMembers(printer);
     printer->Print("\n");
   }
@@ -328,7 +326,7 @@ void ImmutableMessageLiteGenerator::Generate(io::Printer* printer) {
   GenerateMessageSerializationMethods(printer);
 
   // GenerateParseFromMethods(printer);
-  GenerateBuilder(printer);
+  // GenerateBuilder(printer);
 
   if (HasRequiredFields(descriptor_)) {
     // Memoizes whether the protocol buffer is fully initialized (has all
@@ -816,7 +814,7 @@ void ImmutableMessageLiteGenerator::GenerateDynamicMethodMakeImmutable(
 void ImmutableMessageLiteGenerator::GenerateDynamicMethodNewBuilder(
     io::Printer* printer) {
   printer->Print(
-    "return new Builder();\n");
+    "return new Builder(DEFAULT_INSTANCE);\n");
 }
 
 // ===================================================================
@@ -1080,11 +1078,11 @@ GenerateConstructor(io::Printer* printer) {
 // ===================================================================
 void ImmutableMessageLiteGenerator::GenerateParser(io::Printer* printer) {
   printer->Print(
-      "private static volatile com.google.protobuf.Parser<$classname$> PARSER;\n"
-      "\n"
-      "public static com.google.protobuf.Parser<$classname$> parser() {\n"
-      "  return DEFAULT_INSTANCE.getParserForType();\n"
-      "}\n",
+      "private static volatile com.google.protobuf.Parser<$classname$> PARSER;\n",
+//      "\n"
+//      "public static com.google.protobuf.Parser<$classname$> parser() {\n"
+//      "  return DEFAULT_INSTANCE.getParserForType();\n"
+//      "}\n",
       "classname", descriptor_->name());
 }
 
