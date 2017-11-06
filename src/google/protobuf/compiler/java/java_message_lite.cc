@@ -821,12 +821,22 @@ void ImmutableMessageLiteGenerator::GenerateDynamicMethodNewBuilder(
 
 void ImmutableMessageLiteGenerator::GenerateDynamicMethodVisit(
     io::Printer* printer) {
+  for (size_t i = 0; i < descriptor_->enum_type_count(); i++)
+  {
+    const EnumDescriptor *enum_desc = descriptor_->enum_type(i);
+    if (enum_desc->name() == "Type")
+    {
+      printer->Print(
+        "if (com.yy.mobile.yyprotocol.core.Uint32.class.equals(arg0)) {\n"
+        "  return com.yy.mobile.yyprotocol.core.Uint32.toUInt(Type.max_VALUE);\n"
+        "} else if (com.yy.mobile.yyprotocol.core.Uint32.class.equals(arg1)) {\n"
+        "  return com.yy.mobile.yyprotocol.core.Uint32.toUInt(Type.min_VALUE);\n"
+        "}\n"
+      );
+      break;
+    }
+  }
   printer->Print(
-    "if (com.yy.mobile.yyprotocol.core.Uint32.class.equals(arg0)) {\n"
-    "  return com.yy.mobile.yyprotocol.core.Uint32.toUInt(Type.max_VALUE);\n"
-    "} else if (com.yy.mobile.yyprotocol.core.Uint32.class.equals(arg1)) {\n"
-    "  return com.yy.mobile.yyprotocol.core.Uint32.toUInt(Type.min_VALUE);\n"
-    "}\n"
     "Visitor visitor = (Visitor) arg0;\n"
     "$classname$ other = ($classname$) arg1;\n",
     "classname", name_resolver_->GetImmutableClassName(descriptor_));
