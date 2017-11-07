@@ -182,6 +182,7 @@ void ImmutableMessageLiteGenerator::Generate(io::Printer* printer) {
 
   // The builder_type stores the super type name of the nested Builder class.
   string builder_type;
+  bool hasMaxMinTypeEnum = false;
   if (descriptor_->extension_range_count() > 0) {
     printer->Print(variables,
       "public $static$final class $classname$ extends\n"
@@ -206,8 +207,13 @@ void ImmutableMessageLiteGenerator::Generate(io::Printer* printer) {
 
   // Nested types
   for (int i = 0; i < descriptor_->enum_type_count(); i++) {
-    EnumLiteGenerator(descriptor_->enum_type(i), true, context_)
+    hasMaxMinTypeEnum = GenerateMaxMinTypeConstant(
+      printer, descriptor_->enum_type(i));
+    if (!hasMaxMinTypeEnum)
+    {
+      EnumLiteGenerator(descriptor_->enum_type(i), true, context_)
         .Generate(printer);
+    }
   }
 
   for (int i = 0; i < descriptor_->nested_type_count(); i++) {
@@ -376,6 +382,10 @@ void ImmutableMessageLiteGenerator::Generate(io::Printer* printer) {
     "case VISIT: {\n");
 
   printer->Indent();
+  if (hasMaxMinTypeEnum)
+  {
+    GenerateMaxMinTypeImplInVisit(printer);
+  }
   GenerateDynamicMethodVisit(printer);
   printer->Outdent();
 
@@ -821,21 +831,6 @@ void ImmutableMessageLiteGenerator::GenerateDynamicMethodNewBuilder(
 
 void ImmutableMessageLiteGenerator::GenerateDynamicMethodVisit(
     io::Printer* printer) {
-  for (size_t i = 0; i < descriptor_->enum_type_count(); i++)
-  {
-    const EnumDescriptor *enum_desc = descriptor_->enum_type(i);
-    if (enum_desc->name() == "Type")
-    {
-      printer->Print(
-        "if (com.yy.mobile.yyprotocol.core.Uint32.class.equals(arg0)) {\n"
-        "  return com.yy.mobile.yyprotocol.core.Uint32.toUInt(Type.max_VALUE);\n"
-        "} else if (com.yy.mobile.yyprotocol.core.Uint32.class.equals(arg1)) {\n"
-        "  return com.yy.mobile.yyprotocol.core.Uint32.toUInt(Type.min_VALUE);\n"
-        "}\n"
-      );
-      break;
-    }
-  }
   printer->Print(
     "Visitor visitor = (Visitor) arg0;\n"
     "$classname$ other = ($classname$) arg1;\n",
@@ -1083,6 +1078,52 @@ GenerateConstructor(io::Printer* printer) {
   printer->Outdent();
   printer->Print(
       "}\n");
+}
+
+// ===================================================================
+// 生成大小类常量，max_VALUE，min_VALUE
+bool ImmutableMessageLiteGenerator::GenerateMaxMinTypeConstant(
+  io::Printer* printer, 
+  const EnumDescriptor* enumDescriptor) {
+  if (enumDescriptor->name() == "Type")
+  {
+    int maxType = 0, minType = 0;
+    for (size_t i = 0; i < enumDescriptor->value_count(); i++)
+    {
+      const EnumValueDescriptor *vd = enumDescriptor->value(i);
+      if (vd->name() == "max")
+      {
+        maxType = vd->number();
+      }
+      else if (vd->name() == "min") {
+        minType = vd->number();
+      }
+
+      if (maxType > 0 && minType > 0)
+      {
+        printer->Print(
+          "\n"
+          "public final static int max_VALUE = $maxType$;\n"
+          "public final static int min_VALUE = $minType$;\n\n", 
+          "maxType", SimpleItoa(maxType), 
+          "minType", SimpleItoa(minType));
+        return true;
+      }
+    }
+  }
+  return false;
+}
+
+// ===================================================================
+// 在dynamicMethod插入代码，生成getMaxType, getMinType实现
+void ImmutableMessageLiteGenerator::GenerateMaxMinTypeImplInVisit(io::Printer* printer) {
+  printer->Print(
+    "if (com.yy.mobile.yyprotocol.core.Uint32.class.equals(arg0)) {\n"
+    "  return com.yy.mobile.yyprotocol.core.Uint32.toUInt(max_VALUE);\n"
+    "} else if (com.yy.mobile.yyprotocol.core.Uint32.class.equals(arg1)) {\n"
+    "  return com.yy.mobile.yyprotocol.core.Uint32.toUInt(min_VALUE);\n"
+    "}\n"
+  );
 }
 
 // ===================================================================

@@ -76,6 +76,8 @@ class ImmutableMessageLiteGenerator : public MessageGenerator {
   void GenerateEqualsAndHashCode(io::Printer* printer);
   void GenerateParser(io::Printer* printer);
   void GenerateConstructor(io::Printer* printer);
+  bool GenerateMaxMinTypeConstant(io::Printer* printer, const EnumDescriptor* enumDescriptor);
+  void GenerateMaxMinTypeImplInVisit(io::Printer* printer);
 
   Context* context_;
   ClassNameResolver* name_resolver_;
