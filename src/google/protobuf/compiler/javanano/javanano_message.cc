@@ -136,18 +136,18 @@ void MessageGenerator::Generate(io::Printer* printer) {
   }
   if (params_.store_unknown_fields() && params_.parcelable_messages()) {
     printer->Print(
-      "    com.google.protobuf.nano.android.ParcelableExtendableMessageNano<$classname$>",
+      "    com.yymobile.core.ent.protos.EntParcelableExtendableMessageNano<$classname$>",
       "classname", descriptor_->name());
   } else if (params_.store_unknown_fields()) {
     printer->Print(
-      "    com.google.protobuf.nano.ExtendableMessageNano<$classname$>",
+      "    com.yymobile.core.ent.protos.EntExtendableMessageNano<$classname$>",
       "classname", descriptor_->name());
   } else if (params_.parcelable_messages()) {
     printer->Print(
-      "    com.google.protobuf.nano.android.ParcelableMessageNano");
+      "    com.yymobile.core.ent.protos.EntParcelableMessageNano");
   } else {
     printer->Print(
-      "    com.google.protobuf.nano.MessageNano");
+      "    com.yymobile.core.ent.protos.EntMessageNano");
   }
   if (params_.generate_clone()) {
     printer->Print(" implements java.lang.Cloneable {\n");
@@ -333,7 +333,25 @@ void MessageGenerator::Generate(io::Printer* printer) {
 
   GenerateMessageSerializationMethods(printer);
   GenerateMergeFromMethods(printer);
-  GenerateParseFromMethods(printer);
+  //GenerateParseFromMethods(printer);
+
+  // 生成getMaxType和getMinType实现
+  for (int i = 0; i < descriptor_->enum_type_count(); i++) {
+    if (descriptor_->enum_type(i)->name() == "Type")
+    {
+      printer->Print(
+        "\n@Override\n"
+        "public com.yy.mobile.yyprotocol.core.Uint32 getMaxType() {\n"
+        "  return com.yy.mobile.yyprotocol.core.Uint32.toUInt(max);\n"
+        "}\n\n"
+        "@Override\n"
+        "public com.yy.mobile.yyprotocol.core.Uint32 getMinType() {\n"
+        "  return com.yy.mobile.yyprotocol.core.Uint32.toUInt(min);\n"
+        "}\n"
+      );
+      break;
+    }
+  }
 
   printer->Outdent();
   printer->Print("}\n");

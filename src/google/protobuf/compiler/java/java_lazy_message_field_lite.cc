@@ -98,35 +98,35 @@ GenerateMembers(io::Printer* printer) const {
     "  $set_has_field_bit_message$\n"
     "}\n");
 
-  // Field.Builder setField(Field.Builder builderForValue)
-  WriteFieldDocComment(printer, descriptor_);
-  printer->Print(variables_,
-    "private void set$capitalized_name$(\n"
-    "    $type$.Builder builderForValue) {\n"
-    "  if ($name$_ == null) {\n"
-    "    $name$_ = new com.google.protobuf.LazyFieldLite();\n"
-    "  }\n"
-    "  $name$_.setValue(builderForValue.build());\n"
-    "  $set_has_field_bit_message$\n"
-    "}\n");
+  //// Field.Builder setField(Field.Builder builderForValue)
+  //WriteFieldDocComment(printer, descriptor_);
+  //printer->Print(variables_,
+  //  "private void set$capitalized_name$(\n"
+  //  "    $type$.Builder builderForValue) {\n"
+  //  "  if ($name$_ == null) {\n"
+  //  "    $name$_ = new com.google.protobuf.LazyFieldLite();\n"
+  //  "  }\n"
+  //  "  $name$_.setValue(builderForValue.build());\n"
+  //  "  $set_has_field_bit_message$\n"
+  //  "}\n");
 
-  // Field.Builder mergeField(Field value)
-  WriteFieldDocComment(printer, descriptor_);
-  printer->Print(variables_,
-    "private void merge$capitalized_name$($type$ value) {\n"
-    "  if (has$capitalized_name$() &&\n"
-    "      !$name$_.containsDefaultInstance()) {\n"
-    "    $name$_.setValue(\n"
-    "      $type$.newBuilder(\n"
-    "          get$capitalized_name$()).mergeFrom(value).buildPartial());\n"
-    "  } else {\n"
-    "    if ($name$_ == null) {\n"
-    "      $name$_ = new com.google.protobuf.LazyFieldLite();\n"
-    "    }\n"
-    "    $name$_.setValue(value);\n"
-    "    $set_has_field_bit_message$\n"
-    "  }\n"
-    "}\n");
+  //// Field.Builder mergeField(Field value)
+  //WriteFieldDocComment(printer, descriptor_);
+  //printer->Print(variables_,
+  //  "private void merge$capitalized_name$($type$ value) {\n"
+  //  "  if (has$capitalized_name$() &&\n"
+  //  "      !$name$_.containsDefaultInstance()) {\n"
+  //  "    $name$_.setValue(\n"
+  //  "      $type$.newBuilder(\n"
+  //  "          get$capitalized_name$()).mergeFrom(value).buildPartial());\n"
+  //  "  } else {\n"
+  //  "    if ($name$_ == null) {\n"
+  //  "      $name$_ = new com.google.protobuf.LazyFieldLite();\n"
+  //  "    }\n"
+  //  "    $name$_.setValue(value);\n"
+  //  "    $set_has_field_bit_message$\n"
+  //  "  }\n"
+  //  "}\n");
 
   // Field.Builder clearField()
   WriteFieldDocComment(printer, descriptor_);
@@ -284,45 +284,45 @@ GenerateMembers(io::Printer* printer) const {
     "  (($lazy_type$) $oneof_name$_).setValue(value);\n"
     "}\n");
 
-  // Field.Builder setField(Field.Builder builderForValue)
-  WriteFieldDocComment(printer, descriptor_);
-  printer->Print(variables_,
-    "private void set$capitalized_name$(\n"
-    "    $type$.Builder builderForValue) {\n"
-    "  if (!($has_oneof_case_message$)) {\n"
-    "    $oneof_name$_ = new $lazy_type$();\n"
-    "    $set_oneof_case_message$;\n"
-    "  }\n"
-    "  (($lazy_type$) $oneof_name$_).setValue(builderForValue.build());\n"
-    "}\n");
+  //// Field.Builder setField(Field.Builder builderForValue)
+  //WriteFieldDocComment(printer, descriptor_);
+  //printer->Print(variables_,
+  //  "private void set$capitalized_name$(\n"
+  //  "    $type$.Builder builderForValue) {\n"
+  //  "  if (!($has_oneof_case_message$)) {\n"
+  //  "    $oneof_name$_ = new $lazy_type$();\n"
+  //  "    $set_oneof_case_message$;\n"
+  //  "  }\n"
+  //  "  (($lazy_type$) $oneof_name$_).setValue(builderForValue.build());\n"
+  //  "}\n");
 
-  // Field.Builder mergeField(Field value)
-  WriteFieldDocComment(printer, descriptor_);
-  printer->Print(variables_,
-    "private void merge$capitalized_name$($type$ value) {\n"
-    "  if ($has_oneof_case_message$ &&\n"
-    "      !(($lazy_type$) $oneof_name$_).containsDefaultInstance()) {\n"
-    "    (($lazy_type$) $oneof_name$_).setValue(\n"
-    "       $type$.newBuilder(\n"
-    "          get$capitalized_name$()).mergeFrom(value).buildPartial());\n"
-    "  } else {\n"
-    "    if (!($has_oneof_case_message$)) {\n"
-    "      $oneof_name$_ = new $lazy_type$();\n"
-    "      $set_oneof_case_message$;\n"
-    "    }\n"
-    "    (($lazy_type$) $oneof_name$_).setValue(value);\n"
-    "  }\n"
-    "}\n");
+  //// Field.Builder mergeField(Field value)
+  //WriteFieldDocComment(printer, descriptor_);
+  //printer->Print(variables_,
+  //  "private void merge$capitalized_name$($type$ value) {\n"
+  //  "  if ($has_oneof_case_message$ &&\n"
+  //  "      !(($lazy_type$) $oneof_name$_).containsDefaultInstance()) {\n"
+  //  "    (($lazy_type$) $oneof_name$_).setValue(\n"
+  //  "       $type$.newBuilder(\n"
+  //  "          get$capitalized_name$()).mergeFrom(value).buildPartial());\n"
+  //  "  } else {\n"
+  //  "    if (!($has_oneof_case_message$)) {\n"
+  //  "      $oneof_name$_ = new $lazy_type$();\n"
+  //  "      $set_oneof_case_message$;\n"
+  //  "    }\n"
+  //  "    (($lazy_type$) $oneof_name$_).setValue(value);\n"
+  //  "  }\n"
+  //  "}\n");
 
-  // Field.Builder clearField()
-  WriteFieldDocComment(printer, descriptor_);
-  printer->Print(variables_,
-    "private void clear$capitalized_name$() {\n"
-    "  if ($has_oneof_case_message$) {\n"
-    "    $clear_oneof_case_message$;\n"
-    "    $oneof_name$_ = null;\n"
-    "  }\n"
-    "}\n");
+  //// Field.Builder clearField()
+  //WriteFieldDocComment(printer, descriptor_);
+  //printer->Print(variables_,
+  //  "private void clear$capitalized_name$() {\n"
+  //  "  if ($has_oneof_case_message$) {\n"
+  //  "    $clear_oneof_case_message$;\n"
+  //  "    $oneof_name$_ = null;\n"
+  //  "  }\n"
+  //  "}\n");
 }
 
 void ImmutableLazyMessageOneofFieldLiteGenerator::
@@ -449,12 +449,12 @@ GenerateMembers(io::Printer* printer) const {
     // TODO(dweis): Make this list immutable?
     "  return list;\n"
     "}\n");
-  WriteFieldDocComment(printer, descriptor_);
-  printer->Print(variables_,
-    "$deprecation$public java.util.List<? extends $type$OrBuilder>\n"
-    "    get$capitalized_name$OrBuilderList() {\n"
-    "  return get$capitalized_name$List();\n"
-    "}\n");
+  //WriteFieldDocComment(printer, descriptor_);
+  //printer->Print(variables_,
+  //  "$deprecation$public java.util.List<? extends $type$OrBuilder>\n"
+  //  "    get$capitalized_name$OrBuilderList() {\n"
+  //  "  return get$capitalized_name$List();\n"
+  //  "}\n");
   WriteFieldDocComment(printer, descriptor_);
   printer->Print(variables_,
     "$deprecation$public int get$capitalized_name$Count() {\n"
@@ -466,13 +466,13 @@ GenerateMembers(io::Printer* printer) const {
     "  return ($type$)\n"
     "      $name$_.get(index).getValue($type$.getDefaultInstance());\n"
     "}\n");
-  WriteFieldDocComment(printer, descriptor_);
-  printer->Print(variables_,
-    "$deprecation$public $type$OrBuilder get$capitalized_name$OrBuilder(\n"
-    "    int index) {\n"
-    "  return ($type$OrBuilder)\n"
-    "      $name$_.get(index).getValue($type$.getDefaultInstance());\n"
-    "}\n");
+  //WriteFieldDocComment(printer, descriptor_);
+  //printer->Print(variables_,
+  //  "$deprecation$public $type$OrBuilder get$capitalized_name$OrBuilder(\n"
+  //  "    int index) {\n"
+  //  "  return ($type$OrBuilder)\n"
+  //  "      $name$_.get(index).getValue($type$.getDefaultInstance());\n"
+  //  "}\n");
 
   printer->Print(variables_,
     "private void ensure$capitalized_name$IsMutable() {\n"
@@ -496,15 +496,15 @@ GenerateMembers(io::Printer* printer) const {
     "      index, com.google.protobuf.LazyFieldLite.fromValue(value));\n"
     "}\n");
 
-  // Builder setRepeatedField(int index, Field.Builder builderForValue)
-  WriteFieldDocComment(printer, descriptor_);
-  printer->Print(variables_,
-    "private void set$capitalized_name$(\n"
-    "    int index, $type$.Builder builderForValue) {\n"
-    "  ensure$capitalized_name$IsMutable();\n"
-    "  $name$_.set(index, com.google.protobuf.LazyFieldLite.fromValue(\n"
-    "      builderForValue.build()));\n"
-    "}\n");
+  //// Builder setRepeatedField(int index, Field.Builder builderForValue)
+  //WriteFieldDocComment(printer, descriptor_);
+  //printer->Print(variables_,
+  //  "private void set$capitalized_name$(\n"
+  //  "    int index, $type$.Builder builderForValue) {\n"
+  //  "  ensure$capitalized_name$IsMutable();\n"
+  //  "  $name$_.set(index, com.google.protobuf.LazyFieldLite.fromValue(\n"
+  //  "      builderForValue.build()));\n"
+  //  "}\n");
 
   // Builder addRepeatedField(Field value)
   WriteFieldDocComment(printer, descriptor_);
@@ -530,25 +530,25 @@ GenerateMembers(io::Printer* printer) const {
     "      index, com.google.protobuf.LazyFieldLite.fromValue(value));\n"
     "}\n");
 
-  // Builder addRepeatedField(Field.Builder builderForValue)
-  WriteFieldDocComment(printer, descriptor_);
-  printer->Print(variables_,
-    "private void add$capitalized_name$(\n"
-    "    $type$.Builder builderForValue) {\n"
-    "  ensure$capitalized_name$IsMutable();\n"
-    "  $name$_.add(com.google.protobuf.LazyFieldLite.fromValue(\n"
-    "      builderForValue.build()));\n"
-    "}\n");
+  //// Builder addRepeatedField(Field.Builder builderForValue)
+  //WriteFieldDocComment(printer, descriptor_);
+  //printer->Print(variables_,
+  //  "private void add$capitalized_name$(\n"
+  //  "    $type$.Builder builderForValue) {\n"
+  //  "  ensure$capitalized_name$IsMutable();\n"
+  //  "  $name$_.add(com.google.protobuf.LazyFieldLite.fromValue(\n"
+  //  "      builderForValue.build()));\n"
+  //  "}\n");
 
-  // Builder addRepeatedField(int index, Field.Builder builderForValue)
-  WriteFieldDocComment(printer, descriptor_);
-  printer->Print(variables_,
-    "private void add$capitalized_name$(\n"
-    "    int index, $type$.Builder builderForValue) {\n"
-    "  ensure$capitalized_name$IsMutable();\n"
-    "  $name$_.add(index, com.google.protobuf.LazyFieldLite.fromValue(\n"
-    "      builderForValue.build()));\n"
-    "}\n");
+  //// Builder addRepeatedField(int index, Field.Builder builderForValue)
+  //WriteFieldDocComment(printer, descriptor_);
+  //printer->Print(variables_,
+  //  "private void add$capitalized_name$(\n"
+  //  "    int index, $type$.Builder builderForValue) {\n"
+  //  "  ensure$capitalized_name$IsMutable();\n"
+  //  "  $name$_.add(index, com.google.protobuf.LazyFieldLite.fromValue(\n"
+  //  "      builderForValue.build()));\n"
+  //  "}\n");
 
   // Builder addAllRepeatedField(Iterable<Field> values)
   WriteFieldDocComment(printer, descriptor_);

@@ -234,27 +234,36 @@ GenerateMembers(io::Printer* printer) const {
   WriteFieldDocComment(printer, descriptor_);
   printer->Print(variables_,
     "public void set$capitalized_name$($type$ value) {\n"
-    "$null_check$"
-    "  $set_has_field_bit_message$\n"
-    "  $name$_ = value;\n"
+    //"$null_check$"
+    "  $set_has_field_bit_message$\n");
+    JavaType type = GetJavaType(descriptor_);
+    if (type == JAVATYPE_STRING || type == JAVATYPE_BYTES) {
+      printer->Print(variables_,
+        "  $name$_ = (value == null ? getDefaultInstance().get$capitalized_name$() : value);\n");
+    }
+    else {
+      printer->Print(variables_,
+        "  $name$_ = value;\n");
+    }
+    printer->Print(variables_,
     "}\n");
 
-  WriteFieldDocComment(printer, descriptor_);
-  printer->Print(variables_,
-    "public void clear$capitalized_name$() {\n"
-    "  $clear_has_field_bit_message$\n");
-  JavaType type = GetJavaType(descriptor_);
-  if (type == JAVATYPE_STRING || type == JAVATYPE_BYTES) {
-    // The default value is not a simple literal so we want to avoid executing
-    // it multiple times.  Instead, get the default out of the default instance.
-    printer->Print(variables_,
-      "  $name$_ = getDefaultInstance().get$capitalized_name$();\n");
-  } else {
-    printer->Print(variables_,
-      "  $name$_ = $default$;\n");
-  }
-  printer->Print(variables_,
-    "}\n");
+  //WriteFieldDocComment(printer, descriptor_);
+  //printer->Print(variables_,
+  //  "public void clear$capitalized_name$() {\n"
+  //  "  $clear_has_field_bit_message$\n");
+  //JavaType type = GetJavaType(descriptor_);
+  //if (type == JAVATYPE_STRING || type == JAVATYPE_BYTES) {
+  //  // The default value is not a simple literal so we want to avoid executing
+  //  // it multiple times.  Instead, get the default out of the default instance.
+  //  printer->Print(variables_,
+  //    "  $name$_ = getDefaultInstance().get$capitalized_name$();\n");
+  //} else {
+  //  printer->Print(variables_,
+  //    "  $name$_ = $default$;\n");
+  //}
+  //printer->Print(variables_,
+  //  "}\n");
 }
 
 void ImmutablePrimitiveFieldLiteGenerator::
@@ -501,14 +510,14 @@ GenerateMembers(io::Printer* printer) const {
     "  $oneof_name$_ = value;\n"
     "}\n");
 
-  WriteFieldDocComment(printer, descriptor_);
-  printer->Print(variables_,
-    "private void clear$capitalized_name$() {\n"
-    "  if ($has_oneof_case_message$) {\n"
-    "    $clear_oneof_case_message$;\n"
-    "    $oneof_name$_ = null;\n"
-    "  }\n"
-    "}\n");
+  //WriteFieldDocComment(printer, descriptor_);
+  //printer->Print(variables_,
+  //  "private void clear$capitalized_name$() {\n"
+  //  "  if ($has_oneof_case_message$) {\n"
+  //  "    $clear_oneof_case_message$;\n"
+  //  "    $oneof_name$_ = null;\n"
+  //  "  }\n"
+  //  "}\n");
 }
 
 
@@ -632,18 +641,19 @@ GenerateMembers(io::Printer* printer) const {
   printer->Print(variables_,
     "$deprecation$public java.util.List<$boxed_type$>\n"
     "    get$capitalized_name$List() {\n"
+    "  ensure$capitalized_name$IsMutable();\n"
     "  return $name$_;\n"   // note:  unmodifiable list
     "}\n");
-  WriteFieldDocComment(printer, descriptor_);
-  printer->Print(variables_,
-    "$deprecation$public int get$capitalized_name$Count() {\n"
-    "  return $name$_.size();\n"
-    "}\n");
-  WriteFieldDocComment(printer, descriptor_);
-  printer->Print(variables_,
-    "$deprecation$public $type$ get$capitalized_name$(int index) {\n"
-    "  return $repeated_get$(index);\n"
-    "}\n");
+  //WriteFieldDocComment(printer, descriptor_);
+  //printer->Print(variables_,
+  //  "$deprecation$public int get$capitalized_name$Count() {\n"
+  //  "  return $name$_.size();\n"
+  //  "}\n");
+  //WriteFieldDocComment(printer, descriptor_);
+  //printer->Print(variables_,
+  //  "$deprecation$public $type$ get$capitalized_name$(int index) {\n"
+  //  "  return $repeated_get$(index);\n"
+  //  "}\n");
 
   if (descriptor_->options().packed() &&
       context_->HasGeneratedMethods(descriptor_->containing_type())) {
@@ -659,34 +669,34 @@ GenerateMembers(io::Printer* printer) const {
     "   }\n"
     "}\n");
 
-  WriteFieldDocComment(printer, descriptor_);
-  printer->Print(variables_,
-    "private void set$capitalized_name$(\n"
-    "    int index, $type$ value) {\n"
-    "$null_check$"
-    "  ensure$capitalized_name$IsMutable();\n"
-    "  $repeated_set$(index, value);\n"
-    "}\n");
-  WriteFieldDocComment(printer, descriptor_);
-  printer->Print(variables_,
-    "private void add$capitalized_name$($type$ value) {\n"
-    "$null_check$"
-    "  ensure$capitalized_name$IsMutable();\n"
-    "  $repeated_add$(value);\n"
-    "}\n");
-  WriteFieldDocComment(printer, descriptor_);
-  printer->Print(variables_,
-    "private void addAll$capitalized_name$(\n"
-    "    java.lang.Iterable<? extends $boxed_type$> values) {\n"
-    "  ensure$capitalized_name$IsMutable();\n"
-    "  com.google.protobuf.AbstractMessageLite.addAll(\n"
-    "      values, $name$_);\n"
-    "}\n");
-  WriteFieldDocComment(printer, descriptor_);
-  printer->Print(variables_,
-    "private void clear$capitalized_name$() {\n"
-    "  $name$_ = $empty_list$;\n"
-    "}\n");
+  //WriteFieldDocComment(printer, descriptor_);
+  //printer->Print(variables_,
+  //  "private void set$capitalized_name$(\n"
+  //  "    int index, $type$ value) {\n"
+  //  "$null_check$"
+  //  "  ensure$capitalized_name$IsMutable();\n"
+  //  "  $repeated_set$(index, value);\n"
+  //  "}\n");
+  //WriteFieldDocComment(printer, descriptor_);
+  //printer->Print(variables_,
+  //  "private void add$capitalized_name$($type$ value) {\n"
+  //  "$null_check$"
+  //  "  ensure$capitalized_name$IsMutable();\n"
+  //  "  $repeated_add$(value);\n"
+  //  "}\n");
+  //WriteFieldDocComment(printer, descriptor_);
+  //printer->Print(variables_,
+  //  "private void addAll$capitalized_name$(\n"
+  //  "    java.lang.Iterable<? extends $boxed_type$> values) {\n"
+  //  "  ensure$capitalized_name$IsMutable();\n"
+  //  "  com.google.protobuf.AbstractMessageLite.addAll(\n"
+  //  "      values, $name$_);\n"
+  //  "}\n");
+  //WriteFieldDocComment(printer, descriptor_);
+  //printer->Print(variables_,
+  //  "private void clear$capitalized_name$() {\n"
+  //  "  $name$_ = $empty_list$;\n"
+  //  "}\n");
 }
 
 void RepeatedImmutablePrimitiveFieldLiteGenerator::

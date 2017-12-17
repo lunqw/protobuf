@@ -199,12 +199,12 @@ GenerateMembers(io::Printer* printer) const {
     "  $set_has_field_bit_message$\n"
     "  $name$_ = value.getNumber();\n"
     "}\n");
-  WriteFieldDocComment(printer, descriptor_);
-  printer->Print(variables_,
-    "public void clear$capitalized_name$() {\n"
-    "  $clear_has_field_bit_message$\n"
-    "  $name$_ = $default_number$;\n"
-    "}\n");
+  //WriteFieldDocComment(printer, descriptor_);
+  //printer->Print(variables_,
+  //  "public void clear$capitalized_name$() {\n"
+  //  "  $clear_has_field_bit_message$\n"
+  //  "  $name$_ = $default_number$;\n"
+  //  "}\n");
 }
 
 void ImmutableEnumFieldLiteGenerator::
@@ -373,16 +373,16 @@ GenerateMembers(io::Printer* printer) const {
       "  return $has_oneof_case_message$;\n"
       "}\n");
   }
-  if (SupportUnknownEnumValue(descriptor_->file())) {
-    WriteFieldDocComment(printer, descriptor_);
-    printer->Print(variables_,
-      "$deprecation$public int get$capitalized_name$Value() {\n"
-      "  if ($has_oneof_case_message$) {\n"
-      "    return (java.lang.Integer) $oneof_name$_;\n"
-      "  }\n"
-      "  return $default_number$;\n"
-      "}\n");
-  }
+  //if (SupportUnknownEnumValue(descriptor_->file())) {
+  //  WriteFieldDocComment(printer, descriptor_);
+  //  printer->Print(variables_,
+  //    "$deprecation$public int get$capitalized_name$Value() {\n"
+  //    "  if ($has_oneof_case_message$) {\n"
+  //    "    return (java.lang.Integer) $oneof_name$_;\n"
+  //    "  }\n"
+  //    "  return $default_number$;\n"
+  //    "}\n");
+  //}
   WriteFieldDocComment(printer, descriptor_);
   printer->Print(variables_,
     "$deprecation$public $type$ get$capitalized_name$() {\n"
@@ -394,14 +394,14 @@ GenerateMembers(io::Printer* printer) const {
     "}\n");
 
   // Generate private setters for the builder to proxy into.
-  if (SupportUnknownEnumValue(descriptor_->file())) {
-    WriteFieldDocComment(printer, descriptor_);
-    printer->Print(variables_,
-      "private void set$capitalized_name$Value(int value) {\n"
-      "  $set_oneof_case_message$;\n"
-      "  $oneof_name$_ = value;\n"
-      "}\n");
-  }
+  //if (SupportUnknownEnumValue(descriptor_->file())) {
+  //  WriteFieldDocComment(printer, descriptor_);
+  //  printer->Print(variables_,
+  //    "private void set$capitalized_name$Value(int value) {\n"
+  //    "  $set_oneof_case_message$;\n"
+  //    "  $oneof_name$_ = value;\n"
+  //    "}\n");
+  //}
   WriteFieldDocComment(printer, descriptor_);
   printer->Print(variables_,
     "private void set$capitalized_name$($type$ value) {\n"
@@ -411,14 +411,14 @@ GenerateMembers(io::Printer* printer) const {
     "  $set_oneof_case_message$;\n"
     "  $oneof_name$_ = value.getNumber();\n"
     "}\n");
-  WriteFieldDocComment(printer, descriptor_);
-  printer->Print(variables_,
-    "private void clear$capitalized_name$() {\n"
-    "  if ($has_oneof_case_message$) {\n"
-    "    $clear_oneof_case_message$;\n"
-    "    $oneof_name$_ = null;\n"
-    "  }\n"
-    "}\n");
+  //WriteFieldDocComment(printer, descriptor_);
+  //printer->Print(variables_,
+  //  "private void clear$capitalized_name$() {\n"
+  //  "  if ($has_oneof_case_message$) {\n"
+  //  "    $clear_oneof_case_message$;\n"
+  //  "    $oneof_name$_ = null;\n"
+  //  "  }\n"
+  //  "}\n");
 }
 
 void ImmutableEnumOneofFieldLiteGenerator::
@@ -604,32 +604,33 @@ GenerateMembers(io::Printer* printer) const {
   WriteFieldDocComment(printer, descriptor_);
   printer->Print(variables_,
     "$deprecation$public java.util.List<$type$> get$capitalized_name$List() {\n"
+    "  ensure$capitalized_name$IsMutable();\n"
     "  return new com.google.protobuf.Internal.ListAdapter<\n"
     "      java.lang.Integer, $type$>($name$_, $name$_converter_);\n"
     "}\n");
-  WriteFieldDocComment(printer, descriptor_);
-  printer->Print(variables_,
-    "$deprecation$public int get$capitalized_name$Count() {\n"
-    "  return $name$_.size();\n"
-    "}\n");
-  WriteFieldDocComment(printer, descriptor_);
-  printer->Print(variables_,
-    "$deprecation$public $type$ get$capitalized_name$(int index) {\n"
-    "  return $name$_converter_.convert($name$_.getInt(index));\n"
-    "}\n");
-  if (SupportUnknownEnumValue(descriptor_->file())) {
-    WriteFieldDocComment(printer, descriptor_);
-    printer->Print(variables_,
-      "$deprecation$public java.util.List<java.lang.Integer>\n"
-      "get$capitalized_name$ValueList() {\n"
-      "  return $name$_;\n"
-      "}\n");
-    WriteFieldDocComment(printer, descriptor_);
-    printer->Print(variables_,
-      "$deprecation$public int get$capitalized_name$Value(int index) {\n"
-      "  return $name$_.getInt(index);\n"
-      "}\n");
-  }
+  //WriteFieldDocComment(printer, descriptor_);
+  //printer->Print(variables_,
+  //  "$deprecation$public int get$capitalized_name$Count() {\n"
+  //  "  return $name$_.size();\n"
+  //  "}\n");
+  //WriteFieldDocComment(printer, descriptor_);
+  //printer->Print(variables_,
+  //  "$deprecation$public $type$ get$capitalized_name$(int index) {\n"
+  //  "  return $name$_converter_.convert($name$_.getInt(index));\n"
+  //  "}\n");
+  //if (SupportUnknownEnumValue(descriptor_->file())) {
+  //  WriteFieldDocComment(printer, descriptor_);
+  //  printer->Print(variables_,
+  //    "$deprecation$public java.util.List<java.lang.Integer>\n"
+  //    "get$capitalized_name$ValueList() {\n"
+  //    "  return $name$_;\n"
+  //    "}\n");
+  //  WriteFieldDocComment(printer, descriptor_);
+  //  printer->Print(variables_,
+  //    "$deprecation$public int get$capitalized_name$Value(int index) {\n"
+  //    "  return $name$_.getInt(index);\n"
+  //    "}\n");
+  //}
 
   if (descriptor_->options().packed() &&
       context_->HasGeneratedMethods(descriptor_->containing_type())) {
@@ -645,64 +646,64 @@ GenerateMembers(io::Printer* printer) const {
     "        com.google.protobuf.GeneratedMessageLite.mutableCopy($name$_);\n"
     "  }\n"
     "}\n");
-  WriteFieldDocComment(printer, descriptor_);
-  printer->Print(variables_,
-    "private void set$capitalized_name$(\n"
-    "    int index, $type$ value) {\n"
-    "  if (value == null) {\n"
-    "    throw new NullPointerException();\n"
-    "  }\n"
-    "  ensure$capitalized_name$IsMutable();\n"
-    "  $name$_.setInt(index, value.getNumber());\n"
-    "}\n");
-  WriteFieldDocComment(printer, descriptor_);
-  printer->Print(variables_,
-    "private void add$capitalized_name$($type$ value) {\n"
-    "  if (value == null) {\n"
-    "    throw new NullPointerException();\n"
-    "  }\n"
-    "  ensure$capitalized_name$IsMutable();\n"
-    "  $name$_.addInt(value.getNumber());\n"
-    "}\n");
-  WriteFieldDocComment(printer, descriptor_);
-  printer->Print(variables_,
-    "private void addAll$capitalized_name$(\n"
-    "    java.lang.Iterable<? extends $type$> values) {\n"
-    "  ensure$capitalized_name$IsMutable();\n"
-    "  for ($type$ value : values) {\n"
-    "    $name$_.addInt(value.getNumber());\n"
-    "  }\n"
-    "}\n");
-  WriteFieldDocComment(printer, descriptor_);
-  printer->Print(variables_,
-    "private void clear$capitalized_name$() {\n"
-    "  $name$_ = emptyIntList();\n"
-    "}\n");
+  //WriteFieldDocComment(printer, descriptor_);
+  //printer->Print(variables_,
+  //  "private void set$capitalized_name$(\n"
+  //  "    int index, $type$ value) {\n"
+  //  "  if (value == null) {\n"
+  //  "    throw new NullPointerException();\n"
+  //  "  }\n"
+  //  "  ensure$capitalized_name$IsMutable();\n"
+  //  "  $name$_.setInt(index, value.getNumber());\n"
+  //  "}\n");
+  //WriteFieldDocComment(printer, descriptor_);
+  //printer->Print(variables_,
+  //  "private void add$capitalized_name$($type$ value) {\n"
+  //  "  if (value == null) {\n"
+  //  "    throw new NullPointerException();\n"
+  //  "  }\n"
+  //  "  ensure$capitalized_name$IsMutable();\n"
+  //  "  $name$_.addInt(value.getNumber());\n"
+  //  "}\n");
+  //WriteFieldDocComment(printer, descriptor_);
+  //printer->Print(variables_,
+  //  "private void addAll$capitalized_name$(\n"
+  //  "    java.lang.Iterable<? extends $type$> values) {\n"
+  //  "  ensure$capitalized_name$IsMutable();\n"
+  //  "  for ($type$ value : values) {\n"
+  //  "    $name$_.addInt(value.getNumber());\n"
+  //  "  }\n"
+  //  "}\n");
+  //WriteFieldDocComment(printer, descriptor_);
+  //printer->Print(variables_,
+  //  "private void clear$capitalized_name$() {\n"
+  //  "  $name$_ = emptyIntList();\n"
+  //  "}\n");
 
-  if (SupportUnknownEnumValue(descriptor_->file())) {
-    WriteFieldDocComment(printer, descriptor_);
-    printer->Print(variables_,
-      "private void set$capitalized_name$Value(\n"
-      "    int index, int value) {\n"
-      "  ensure$capitalized_name$IsMutable();\n"
-      "  $name$_.setInt(index, value);\n"
-      "}\n");
-    WriteFieldDocComment(printer, descriptor_);
-    printer->Print(variables_,
-      "private void add$capitalized_name$Value(int value) {\n"
-      "  ensure$capitalized_name$IsMutable();\n"
-      "  $name$_.addInt(value);\n"
-      "}\n");
-    WriteFieldDocComment(printer, descriptor_);
-    printer->Print(variables_,
-      "private void addAll$capitalized_name$Value(\n"
-      "    java.lang.Iterable<java.lang.Integer> values) {\n"
-      "  ensure$capitalized_name$IsMutable();\n"
-      "  for (int value : values) {\n"
-      "    $name$_.addInt(value);\n"
-      "  }\n"
-      "}\n");
-  }
+  //if (SupportUnknownEnumValue(descriptor_->file())) {
+  //  WriteFieldDocComment(printer, descriptor_);
+  //  printer->Print(variables_,
+  //    "private void set$capitalized_name$Value(\n"
+  //    "    int index, int value) {\n"
+  //    "  ensure$capitalized_name$IsMutable();\n"
+  //    "  $name$_.setInt(index, value);\n"
+  //    "}\n");
+  //  WriteFieldDocComment(printer, descriptor_);
+  //  printer->Print(variables_,
+  //    "private void add$capitalized_name$Value(int value) {\n"
+  //    "  ensure$capitalized_name$IsMutable();\n"
+  //    "  $name$_.addInt(value);\n"
+  //    "}\n");
+  //  WriteFieldDocComment(printer, descriptor_);
+  //  printer->Print(variables_,
+  //    "private void addAll$capitalized_name$Value(\n"
+  //    "    java.lang.Iterable<java.lang.Integer> values) {\n"
+  //    "  ensure$capitalized_name$IsMutable();\n"
+  //    "  for (int value : values) {\n"
+  //    "    $name$_.addInt(value);\n"
+  //    "  }\n"
+  //    "}\n");
+  //}
 }
 
 void RepeatedImmutableEnumFieldLiteGenerator::

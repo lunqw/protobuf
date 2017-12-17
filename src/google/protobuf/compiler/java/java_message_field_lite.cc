@@ -150,26 +150,28 @@ GenerateMembers(io::Printer* printer) const {
   PrintExtraFieldInfo(variables_, printer);
 
   if (SupportFieldPresence(descriptor_->file())) {
-    WriteFieldDocComment(printer, descriptor_);
-    printer->Print(variables_,
-      "$deprecation$public boolean has$capitalized_name$() {\n"
-      "  return $get_has_field_bit_message$;\n"
-      "}\n");
+    //WriteFieldDocComment(printer, descriptor_);
+    //printer->Print(variables_,
+    //  "$deprecation$public boolean has$capitalized_name$() {\n"
+    //  "  return $get_has_field_bit_message$;\n"
+    //  "}\n");
     WriteFieldDocComment(printer, descriptor_);
     printer->Print(variables_,
       "$deprecation$public $type$ get$capitalized_name$() {\n"
-      "  return $name$_ == null ? $type$.getDefaultInstance() : $name$_;\n"
+      //"  return $name$_ == null ? $type$.getDefaultInstance() : $name$_;\n"
+      "  return $name$_;\n"
       "}\n");
   } else {
-    WriteFieldDocComment(printer, descriptor_);
-    printer->Print(variables_,
-      "$deprecation$public boolean has$capitalized_name$() {\n"
-      "  return $name$_ != null;\n"
-      "}\n");
+    //WriteFieldDocComment(printer, descriptor_);
+    //printer->Print(variables_,
+    //  "$deprecation$public boolean has$capitalized_name$() {\n"
+    //  "  return $name$_ != null;\n"
+    //  "}\n");
     WriteFieldDocComment(printer, descriptor_);
     printer->Print(variables_,
       "$deprecation$public $type$ get$capitalized_name$() {\n"
-      "  return $name$_ == null ? $type$.getDefaultInstance() : $name$_;\n"
+      //"  return $name$_ == null ? $type$.getDefaultInstance() : $name$_;\n"
+      "  return $name$_;\n"
       "}\n");
   }
 
@@ -177,43 +179,43 @@ GenerateMembers(io::Printer* printer) const {
   WriteFieldDocComment(printer, descriptor_);
   printer->Print(variables_,
     "private void set$capitalized_name$($type$ value) {\n"
-    "  if (value == null) {\n"
-    "    throw new NullPointerException();\n"
-    "  }\n"
+    //"  if (value == null) {\n"
+    //"    throw new NullPointerException();\n"
+    //"  }\n"
     "  $name$_ = value;\n"
     "  $set_has_field_bit_message$\n"
     "  }\n");
 
-  // Field.Builder setField(Field.Builder builderForValue)
-  WriteFieldDocComment(printer, descriptor_);
-  printer->Print(variables_,
-    "private void set$capitalized_name$(\n"
-    "    $type$.Builder builderForValue) {\n"
-    "  $name$_ = builderForValue.build();\n"
-    "  $set_has_field_bit_message$\n"
-    "}\n");
+  //// Field.Builder setField(Field.Builder builderForValue)
+  //WriteFieldDocComment(printer, descriptor_);
+  //printer->Print(variables_,
+  //  "private void set$capitalized_name$(\n"
+  //  "    $type$.Builder builderForValue) {\n"
+  //  "  $name$_ = builderForValue.build();\n"
+  //  "  $set_has_field_bit_message$\n"
+  //  "}\n");
 
-  // Field.Builder mergeField(Field value)
-  WriteFieldDocComment(printer, descriptor_);
-  printer->Print(variables_,
-    "private void merge$capitalized_name$($type$ value) {\n"
-    "  if ($name$_ != null &&\n"
-    "      $name$_ != $type$.getDefaultInstance()) {\n"
-    "    $name$_ =\n"
-    "      $type$.newBuilder($name$_).mergeFrom(value).buildPartial();\n"
-    "  } else {\n"
-    "    $name$_ = value;\n"
-    "  }\n"
-    "  $set_has_field_bit_message$\n"
-    "}\n");
+  //// Field.Builder mergeField(Field value)
+  //WriteFieldDocComment(printer, descriptor_);
+  //printer->Print(variables_,
+  //  "private void merge$capitalized_name$($type$ value) {\n"
+  //  "  if ($name$_ != null &&\n"
+  //  "      $name$_ != $type$.getDefaultInstance()) {\n"
+  //  "    $name$_ =\n"
+  //  "      $type$.newBuilder($name$_).mergeFrom(value).buildPartial();\n"
+  //  "  } else {\n"
+  //  "    $name$_ = value;\n"
+  //  "  }\n"
+  //  "  $set_has_field_bit_message$\n"
+  //  "}\n");
 
   // Field.Builder clearField()
-  WriteFieldDocComment(printer, descriptor_);
-  printer->Print(variables_,
-    "private void clear$capitalized_name$() {"
-    "  $name$_ = null;\n"
-    "  $clear_has_field_bit_message$\n"
-    "}\n");
+  //WriteFieldDocComment(printer, descriptor_);
+  //printer->Print(variables_,
+  //  "private void clear$capitalized_name$() {"
+  //  "  $name$_ = null;\n"
+  //  "  $clear_has_field_bit_message$\n"
+  //  "}\n");
 }
 
 void ImmutableMessageFieldLiteGenerator::
@@ -305,11 +307,11 @@ GenerateParsingCode(io::Printer* printer) const {
   // - transitive builder allocations
   // - the extra transitive iteration for streamed fields
   // - reallocations for copying repeated fields
-  printer->Print(variables_,
-      "$type$.Builder subBuilder = null;\n"
-      "if ($is_field_present_message$) {\n"
-      "  subBuilder = $name$_.toBuilder();\n"
-      "}\n");
+  //printer->Print(variables_,
+      //"$type$.Builder subBuilder = null;\n"
+      //"if ($is_field_present_message$) {\n"
+      //"  subBuilder = $name$_.toBuilder();\n"
+      //"}\n");
 
     if (GetType(descriptor_) == FieldDescriptor::TYPE_GROUP) {
       printer->Print(variables_,
@@ -320,12 +322,12 @@ GenerateParsingCode(io::Printer* printer) const {
         "$name$_ = input.readMessage($type$.parser(), extensionRegistry);\n");
     }
 
-  printer->Print(variables_,
-    "if (subBuilder != null) {\n"
-    "  subBuilder.mergeFrom($name$_);\n"
-    "  $name$_ = subBuilder.buildPartial();\n"
-    "}\n"
-    "$set_has_field_bit_message$\n");
+  //printer->Print(variables_,
+  //  "if (subBuilder != null) {\n"
+  //  "  subBuilder.mergeFrom($name$_);\n"
+  //  "  $name$_ = subBuilder.buildPartial();\n"
+  //  "}\n"
+  //  "$set_has_field_bit_message$\n");
 }
 
 void ImmutableMessageFieldLiteGenerator::
@@ -416,37 +418,37 @@ GenerateMembers(io::Printer* printer) const {
     "}\n");
 
   // Field.Builder setField(Field.Builder builderForValue)
-  WriteFieldDocComment(printer, descriptor_);
-  printer->Print(variables_,
-    "private void set$capitalized_name$(\n"
-    "    $type$.Builder builderForValue) {\n"
-    "  $oneof_name$_ = builderForValue.build();\n"
-    "  $set_oneof_case_message$;\n"
-    "}\n");
+  //WriteFieldDocComment(printer, descriptor_);
+  //printer->Print(variables_,
+  //  "private void set$capitalized_name$(\n"
+  //  "    $type$.Builder builderForValue) {\n"
+  //  "  $oneof_name$_ = builderForValue.build();\n"
+  //  "  $set_oneof_case_message$;\n"
+  //  "}\n");
 
   // Field.Builder mergeField(Field value)
-  WriteFieldDocComment(printer, descriptor_);
-  printer->Print(variables_,
-    "private void merge$capitalized_name$($type$ value) {\n"
-    "  if ($has_oneof_case_message$ &&\n"
-    "      $oneof_name$_ != $type$.getDefaultInstance()) {\n"
-    "    $oneof_name$_ = $type$.newBuilder(($type$) $oneof_name$_)\n"
-    "        .mergeFrom(value).buildPartial();\n"
-    "  } else {\n"
-    "    $oneof_name$_ = value;\n"
-    "  }\n"
-    "  $set_oneof_case_message$;\n"
-    "}\n");
+  //WriteFieldDocComment(printer, descriptor_);
+  //printer->Print(variables_,
+  //  "private void merge$capitalized_name$($type$ value) {\n"
+  //  "  if ($has_oneof_case_message$ &&\n"
+  //  "      $oneof_name$_ != $type$.getDefaultInstance()) {\n"
+  //  "    $oneof_name$_ = $type$.newBuilder(($type$) $oneof_name$_)\n"
+  //  "        .mergeFrom(value).buildPartial();\n"
+  //  "  } else {\n"
+  //  "    $oneof_name$_ = value;\n"
+  //  "  }\n"
+  //  "  $set_oneof_case_message$;\n"
+  //  "}\n");
 
   // Field.Builder clearField()
-  WriteFieldDocComment(printer, descriptor_);
-  printer->Print(variables_,
-    "private void clear$capitalized_name$() {\n"
-    "  if ($has_oneof_case_message$) {\n"
-    "    $clear_oneof_case_message$;\n"
-    "    $oneof_name$_ = null;\n"
-    "  }\n"
-    "}\n");
+  //WriteFieldDocComment(printer, descriptor_);
+  //printer->Print(variables_,
+  //  "private void clear$capitalized_name$() {\n"
+  //  "  if ($has_oneof_case_message$) {\n"
+  //  "    $clear_oneof_case_message$;\n"
+  //  "    $oneof_name$_ = null;\n"
+  //  "  }\n"
+  //  "}\n");
 }
 
 void ImmutableMessageOneofFieldLiteGenerator::
@@ -613,30 +615,31 @@ GenerateMembers(io::Printer* printer) const {
   WriteFieldDocComment(printer, descriptor_);
   printer->Print(variables_,
     "$deprecation$public java.util.List<$type$> get$capitalized_name$List() {\n"
+    "  ensure$capitalized_name$IsMutable();\n"
     "  return $name$_;\n"   // note:  unmodifiable list
     "}\n");
-  WriteFieldDocComment(printer, descriptor_);
-  printer->Print(variables_,
-    "$deprecation$public java.util.List<? extends $type$OrBuilder> \n"
-    "    get$capitalized_name$OrBuilderList() {\n"
-    "  return $name$_;\n"
-    "}\n");
-  WriteFieldDocComment(printer, descriptor_);
-  printer->Print(variables_,
-    "$deprecation$public int get$capitalized_name$Count() {\n"
-    "  return $name$_.size();\n"
-    "}\n");
-  WriteFieldDocComment(printer, descriptor_);
-  printer->Print(variables_,
-    "$deprecation$public $type$ get$capitalized_name$(int index) {\n"
-    "  return $name$_.get(index);\n"
-    "}\n");
-  WriteFieldDocComment(printer, descriptor_);
-  printer->Print(variables_,
-    "$deprecation$public $type$OrBuilder get$capitalized_name$OrBuilder(\n"
-    "    int index) {\n"
-    "  return $name$_.get(index);\n"
-    "}\n");
+  //WriteFieldDocComment(printer, descriptor_);
+  //printer->Print(variables_,
+  //  "$deprecation$public java.util.List<? extends $type$OrBuilder> \n"
+  //  "    get$capitalized_name$OrBuilderList() {\n"
+  //  "  return $name$_;\n"
+  //  "}\n");
+  //WriteFieldDocComment(printer, descriptor_);
+  //printer->Print(variables_,
+  //  "$deprecation$public int get$capitalized_name$Count() {\n"
+  //  "  return $name$_.size();\n"
+  //  "}\n");
+  //WriteFieldDocComment(printer, descriptor_);
+  //printer->Print(variables_,
+  //  "$deprecation$public $type$ get$capitalized_name$(int index) {\n"
+  //  "  return $name$_.get(index);\n"
+  //  "}\n");
+  //WriteFieldDocComment(printer, descriptor_);
+  //printer->Print(variables_,
+  //  "$deprecation$public $type$OrBuilder get$capitalized_name$OrBuilder(\n"
+  //  "    int index) {\n"
+  //  "  return $name$_.get(index);\n"
+  //  "}\n");
 
   printer->Print(variables_,
     "private void ensure$capitalized_name$IsMutable() {\n"
@@ -647,91 +650,91 @@ GenerateMembers(io::Printer* printer) const {
     "}\n"
     "\n");
 
-  // Builder setRepeatedField(int index, Field value)
-  WriteFieldDocComment(printer, descriptor_);
-  printer->Print(variables_,
-    "private void set$capitalized_name$(\n"
-    "    int index, $type$ value) {\n"
-    "  if (value == null) {\n"
-    "    throw new NullPointerException();\n"
-    "  }\n"
-    "  ensure$capitalized_name$IsMutable();\n"
-    "  $name$_.set(index, value);\n"
-    "}\n");
+  //// Builder setRepeatedField(int index, Field value)
+  //WriteFieldDocComment(printer, descriptor_);
+  //printer->Print(variables_,
+  //  "private void set$capitalized_name$(\n"
+  //  "    int index, $type$ value) {\n"
+  //  "  if (value == null) {\n"
+  //  "    throw new NullPointerException();\n"
+  //  "  }\n"
+  //  "  ensure$capitalized_name$IsMutable();\n"
+  //  "  $name$_.set(index, value);\n"
+  //  "}\n");
 
-  // Builder setRepeatedField(int index, Field.Builder builderForValue)
-  WriteFieldDocComment(printer, descriptor_);
-  printer->Print(variables_,
-    "private void set$capitalized_name$(\n"
-    "    int index, $type$.Builder builderForValue) {\n"
-    "  ensure$capitalized_name$IsMutable();\n"
-    "  $name$_.set(index, builderForValue.build());\n"
-    "}\n");
+  //// Builder setRepeatedField(int index, Field.Builder builderForValue)
+  //WriteFieldDocComment(printer, descriptor_);
+  //printer->Print(variables_,
+  //  "private void set$capitalized_name$(\n"
+  //  "    int index, $type$.Builder builderForValue) {\n"
+  //  "  ensure$capitalized_name$IsMutable();\n"
+  //  "  $name$_.set(index, builderForValue.build());\n"
+  //  "}\n");
 
-  // Builder addRepeatedField(Field value)
-  WriteFieldDocComment(printer, descriptor_);
-  printer->Print(variables_,
-    "private void add$capitalized_name$($type$ value) {\n"
-    "  if (value == null) {\n"
-    "    throw new NullPointerException();\n"
-    "  }\n"
-    "  ensure$capitalized_name$IsMutable();\n"
-    "  $name$_.add(value);\n"
-    "}\n");
+  //// Builder addRepeatedField(Field value)
+  //WriteFieldDocComment(printer, descriptor_);
+  //printer->Print(variables_,
+  //  "private void add$capitalized_name$($type$ value) {\n"
+  //  "  if (value == null) {\n"
+  //  "    throw new NullPointerException();\n"
+  //  "  }\n"
+  //  "  ensure$capitalized_name$IsMutable();\n"
+  //  "  $name$_.add(value);\n"
+  //  "}\n");
 
-  // Builder addRepeatedField(int index, Field value)
-  WriteFieldDocComment(printer, descriptor_);
-  printer->Print(variables_,
-    "private void add$capitalized_name$(\n"
-    "    int index, $type$ value) {\n"
-    "  if (value == null) {\n"
-    "    throw new NullPointerException();\n"
-    "  }\n"
-    "  ensure$capitalized_name$IsMutable();\n"
-    "  $name$_.add(index, value);\n"
-    "}\n");
-  // Builder addRepeatedField(Field.Builder builderForValue)
-  WriteFieldDocComment(printer, descriptor_);
-  printer->Print(variables_,
-    "private void add$capitalized_name$(\n"
-    "    $type$.Builder builderForValue) {\n"
-    "  ensure$capitalized_name$IsMutable();\n"
-    "  $name$_.add(builderForValue.build());\n"
-    "}\n");
+  //// Builder addRepeatedField(int index, Field value)
+  //WriteFieldDocComment(printer, descriptor_);
+  //printer->Print(variables_,
+  //  "private void add$capitalized_name$(\n"
+  //  "    int index, $type$ value) {\n"
+  //  "  if (value == null) {\n"
+  //  "    throw new NullPointerException();\n"
+  //  "  }\n"
+  //  "  ensure$capitalized_name$IsMutable();\n"
+  //  "  $name$_.add(index, value);\n"
+  //  "}\n");
+  //// Builder addRepeatedField(Field.Builder builderForValue)
+  //WriteFieldDocComment(printer, descriptor_);
+  //printer->Print(variables_,
+  //  "private void add$capitalized_name$(\n"
+  //  "    $type$.Builder builderForValue) {\n"
+  //  "  ensure$capitalized_name$IsMutable();\n"
+  //  "  $name$_.add(builderForValue.build());\n"
+  //  "}\n");
 
-  // Builder addRepeatedField(int index, Field.Builder builderForValue)
-  WriteFieldDocComment(printer, descriptor_);
-  printer->Print(variables_,
-    "private void add$capitalized_name$(\n"
-    "    int index, $type$.Builder builderForValue) {\n"
-    "  ensure$capitalized_name$IsMutable();\n"
-    "  $name$_.add(index, builderForValue.build());\n"
-    "}\n");
+  //// Builder addRepeatedField(int index, Field.Builder builderForValue)
+  //WriteFieldDocComment(printer, descriptor_);
+  //printer->Print(variables_,
+  //  "private void add$capitalized_name$(\n"
+  //  "    int index, $type$.Builder builderForValue) {\n"
+  //  "  ensure$capitalized_name$IsMutable();\n"
+  //  "  $name$_.add(index, builderForValue.build());\n"
+  //  "}\n");
 
-  // Builder addAllRepeatedField(Iterable<Field> values)
-  WriteFieldDocComment(printer, descriptor_);
-  printer->Print(variables_,
-    "private void addAll$capitalized_name$(\n"
-    "    java.lang.Iterable<? extends $type$> values) {\n"
-    "  ensure$capitalized_name$IsMutable();\n"
-    "  com.google.protobuf.AbstractMessageLite.addAll(\n"
-    "      values, $name$_);\n"
-    "}\n");
+  //// Builder addAllRepeatedField(Iterable<Field> values)
+  //WriteFieldDocComment(printer, descriptor_);
+  //printer->Print(variables_,
+  //  "private void addAll$capitalized_name$(\n"
+  //  "    java.lang.Iterable<? extends $type$> values) {\n"
+  //  "  ensure$capitalized_name$IsMutable();\n"
+  //  "  com.google.protobuf.AbstractMessageLite.addAll(\n"
+  //  "      values, $name$_);\n"
+  //  "}\n");
 
   // Builder clearAllRepeatedField()
-  WriteFieldDocComment(printer, descriptor_);
-  printer->Print(variables_,
-    "private void clear$capitalized_name$() {\n"
-    "  $name$_ = emptyProtobufList();\n"
-    "}\n");
+  //WriteFieldDocComment(printer, descriptor_);
+  //printer->Print(variables_,
+  //  "private void clear$capitalized_name$() {\n"
+  //  "  $name$_ = emptyProtobufList();\n"
+  //  "}\n");
 
-  // Builder removeRepeatedField(int index)
-  WriteFieldDocComment(printer, descriptor_);
-  printer->Print(variables_,
-    "private void remove$capitalized_name$(int index) {\n"
-    "  ensure$capitalized_name$IsMutable();\n"
-    "  $name$_.remove(index);\n"
-    "}\n");
+  //// Builder removeRepeatedField(int index)
+  //WriteFieldDocComment(printer, descriptor_);
+  //printer->Print(variables_,
+  //  "private void remove$capitalized_name$(int index) {\n"
+  //  "  ensure$capitalized_name$IsMutable();\n"
+  //  "  $name$_.remove(index);\n"
+  //  "}\n");
 }
 
 void RepeatedImmutableMessageFieldLiteGenerator::

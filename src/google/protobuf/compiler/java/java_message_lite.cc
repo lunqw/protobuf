@@ -1129,11 +1129,12 @@ void ImmutableMessageLiteGenerator::GenerateMaxMinTypeImplInVisit(io::Printer* p
 // ===================================================================
 void ImmutableMessageLiteGenerator::GenerateParser(io::Printer* printer) {
   printer->Print(
-      "private static volatile com.google.protobuf.Parser<$classname$> PARSER;\n",
-//      "\n"
-//      "public static com.google.protobuf.Parser<$classname$> parser() {\n"
-//      "  return DEFAULT_INSTANCE.getParserForType();\n"
-//      "}\n",
+      "private static volatile com.google.protobuf.Parser<$classname$> PARSER;\n"
+      "\n"
+      "public static com.google.protobuf.Parser<$classname$> parser() {\n"
+      "  DEFAULT_INSTANCE.getParserForType();\n"
+      "  return PARSER;\n"
+      "}\n",
       "classname", descriptor_->name());
 }
 

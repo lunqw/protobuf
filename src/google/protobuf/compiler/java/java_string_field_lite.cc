@@ -212,18 +212,18 @@ GenerateMembers(io::Printer* printer) const {
   printer->Print(variables_,
     "public void set$capitalized_name$(\n"
     "    java.lang.String value) {\n"
-    "$null_check$"
+    //"$null_check$"
     "  $set_has_field_bit_message$\n"
-    "  $name$_ = value;\n"
+    "  $name$_ = (value == null ? getDefaultInstance().get$capitalized_name$() : value);\n"
     "}\n");
-  WriteFieldDocComment(printer, descriptor_);
-  printer->Print(variables_,
-    "public void clear$capitalized_name$() {\n"
-    "  $clear_has_field_bit_message$\n"
-    // The default value is not a simple literal so we want to avoid executing
-    // it multiple times.  Instead, get the default out of the default instance.
-    "  $name$_ = getDefaultInstance().get$capitalized_name$();\n"
-    "}\n");
+  //WriteFieldDocComment(printer, descriptor_);
+  //printer->Print(variables_,
+  //  "public void clear$capitalized_name$() {\n"
+  //  "  $clear_has_field_bit_message$\n"
+  //  // The default value is not a simple literal so we want to avoid executing
+  //  // it multiple times.  Instead, get the default out of the default instance.
+  //  "  $name$_ = getDefaultInstance().get$capitalized_name$();\n"
+  //  "}\n");
 
     //  WriteFieldDocComment(printer, descriptor_);
     //  printer->Print(variables_,
@@ -422,17 +422,17 @@ GenerateMembers(io::Printer* printer) const {
     "  }\n"
     "  return ref;\n"
     "}\n");
-  WriteFieldDocComment(printer, descriptor_);
+  //WriteFieldDocComment(printer, descriptor_);
 
-  printer->Print(variables_,
-    "$deprecation$public com.google.protobuf.ByteString\n"
-    "    get$capitalized_name$Bytes() {\n"
-    "  java.lang.String ref $default_init$;\n"
-    "  if ($has_oneof_case_message$) {\n"
-    "    ref = (java.lang.String) $oneof_name$_;\n"
-    "  }\n"
-    "  return com.google.protobuf.ByteString.copyFromUtf8(ref);\n"
-    "}\n");
+  //printer->Print(variables_,
+  //  "$deprecation$public com.google.protobuf.ByteString\n"
+  //  "    get$capitalized_name$Bytes() {\n"
+  //  "  java.lang.String ref $default_init$;\n"
+  //  "  if ($has_oneof_case_message$) {\n"
+  //  "    ref = (java.lang.String) $oneof_name$_;\n"
+  //  "  }\n"
+  //  "  return com.google.protobuf.ByteString.copyFromUtf8(ref);\n"
+  //  "}\n");
 
   WriteFieldDocComment(printer, descriptor_);
   printer->Print(variables_,
@@ -442,28 +442,28 @@ GenerateMembers(io::Printer* printer) const {
     "  $set_oneof_case_message$;\n"
     "  $oneof_name$_ = value;\n"
     "}\n");
-  WriteFieldDocComment(printer, descriptor_);
-  printer->Print(variables_,
-    "private void clear$capitalized_name$() {\n"
-    "  if ($has_oneof_case_message$) {\n"
-    "    $clear_oneof_case_message$;\n"
-    "    $oneof_name$_ = null;\n"
-    "  }\n"
-    "}\n");
+  //WriteFieldDocComment(printer, descriptor_);
+  //printer->Print(variables_,
+  //  "private void clear$capitalized_name$() {\n"
+  //  "  if ($has_oneof_case_message$) {\n"
+  //  "    $clear_oneof_case_message$;\n"
+  //  "    $oneof_name$_ = null;\n"
+  //  "  }\n"
+  //  "}\n");
 
-  WriteFieldDocComment(printer, descriptor_);
-  printer->Print(variables_,
-    "private void set$capitalized_name$Bytes(\n"
-    "    com.google.protobuf.ByteString value) {\n"
-    "$null_check$");
-  if (CheckUtf8(descriptor_)) {
-    printer->Print(variables_,
-      "  checkByteStringIsUtf8(value);\n");
-  }
-  printer->Print(variables_,
-    "  $set_oneof_case_message$;\n"
-    "  $oneof_name$_ = value.toStringUtf8();\n"
-    "}\n");
+  //WriteFieldDocComment(printer, descriptor_);
+  //printer->Print(variables_,
+  //  "private void set$capitalized_name$Bytes(\n"
+  //  "    com.google.protobuf.ByteString value) {\n"
+  //  "$null_check$");
+  //if (CheckUtf8(descriptor_)) {
+  //  printer->Print(variables_,
+  //    "  checkByteStringIsUtf8(value);\n");
+  //}
+  //printer->Print(variables_,
+  //  "  $set_oneof_case_message$;\n"
+  //  "  $oneof_name$_ = value.toStringUtf8();\n"
+  //  "}\n");
 }
 
 void ImmutableStringOneofFieldLiteGenerator::
@@ -617,25 +617,26 @@ GenerateMembers(io::Printer* printer) const {
   WriteFieldDocComment(printer, descriptor_);
   printer->Print(variables_,
     "$deprecation$public java.util.List<String> get$capitalized_name$List() {\n"
+    "  ensure$capitalized_name$IsMutable();\n"
     "  return $name$_;\n"   // note:  unmodifiable list
     "}\n");
-  WriteFieldDocComment(printer, descriptor_);
-  printer->Print(variables_,
-    "$deprecation$public int get$capitalized_name$Count() {\n"
-    "  return $name$_.size();\n"
-    "}\n");
-  WriteFieldDocComment(printer, descriptor_);
-  printer->Print(variables_,
-    "$deprecation$public java.lang.String get$capitalized_name$(int index) {\n"
-    "  return $name$_.get(index);\n"
-    "}\n");
-  WriteFieldDocComment(printer, descriptor_);
-  printer->Print(variables_,
-    "$deprecation$public com.google.protobuf.ByteString\n"
-    "    get$capitalized_name$Bytes(int index) {\n"
-    "  return com.google.protobuf.ByteString.copyFromUtf8(\n"
-    "      $name$_.get(index));\n"
-    "}\n");
+  //WriteFieldDocComment(printer, descriptor_);
+  //printer->Print(variables_,
+  //  "$deprecation$public int get$capitalized_name$Count() {\n"
+  //  "  return $name$_.size();\n"
+  //  "}\n");
+  //WriteFieldDocComment(printer, descriptor_);
+  //printer->Print(variables_,
+  //  "$deprecation$public java.lang.String get$capitalized_name$(int index) {\n"
+  //  "  return $name$_.get(index);\n"
+  //  "}\n");
+  //WriteFieldDocComment(printer, descriptor_);
+  //printer->Print(variables_,
+  //  "$deprecation$public com.google.protobuf.ByteString\n"
+  //  "    get$capitalized_name$Bytes(int index) {\n"
+  //  "  return com.google.protobuf.ByteString.copyFromUtf8(\n"
+  //  "      $name$_.get(index));\n"
+  //  "}\n");
 
   printer->Print(variables_,
     "private void ensure$capitalized_name$IsMutable() {\n"
@@ -645,49 +646,49 @@ GenerateMembers(io::Printer* printer) const {
     "   }\n"
     "}\n");
 
-  WriteFieldDocComment(printer, descriptor_);
-  printer->Print(variables_,
-    "private void set$capitalized_name$(\n"
-    "    int index, java.lang.String value) {\n"
-    "$null_check$"
-    "  ensure$capitalized_name$IsMutable();\n"
-    "  $name$_.set(index, value);\n"
-    "}\n");
-  WriteFieldDocComment(printer, descriptor_);
-  printer->Print(variables_,
-    "private void add$capitalized_name$(\n"
-    "    java.lang.String value) {\n"
-    "$null_check$"
-    "  ensure$capitalized_name$IsMutable();\n"
-    "  $name$_.add(value);\n"
-    "}\n");
-  WriteFieldDocComment(printer, descriptor_);
-  printer->Print(variables_,
-    "private void addAll$capitalized_name$(\n"
-    "    java.lang.Iterable<java.lang.String> values) {\n"
-    "  ensure$capitalized_name$IsMutable();\n"
-    "  com.google.protobuf.AbstractMessageLite.addAll(\n"
-    "      values, $name$_);\n"
-    "}\n");
-  WriteFieldDocComment(printer, descriptor_);
-  printer->Print(variables_,
-    "private void clear$capitalized_name$() {\n"
-    "  $name$_ = $empty_list$;\n"
-    "}\n");
+  //WriteFieldDocComment(printer, descriptor_);
+  //printer->Print(variables_,
+  //  "private void set$capitalized_name$(\n"
+  //  "    int index, java.lang.String value) {\n"
+  //  "$null_check$"
+  //  "  ensure$capitalized_name$IsMutable();\n"
+  //  "  $name$_.set(index, value);\n"
+  //  "}\n");
+  //WriteFieldDocComment(printer, descriptor_);
+  //printer->Print(variables_,
+  //  "private void add$capitalized_name$(\n"
+  //  "    java.lang.String value) {\n"
+  //  "$null_check$"
+  //  "  ensure$capitalized_name$IsMutable();\n"
+  //  "  $name$_.add(value);\n"
+  //  "}\n");
+  //WriteFieldDocComment(printer, descriptor_);
+  //printer->Print(variables_,
+  //  "private void addAll$capitalized_name$(\n"
+  //  "    java.lang.Iterable<java.lang.String> values) {\n"
+  //  "  ensure$capitalized_name$IsMutable();\n"
+  //  "  com.google.protobuf.AbstractMessageLite.addAll(\n"
+  //  "      values, $name$_);\n"
+  //  "}\n");
+  //WriteFieldDocComment(printer, descriptor_);
+  //printer->Print(variables_,
+  //  "private void clear$capitalized_name$() {\n"
+  //  "  $name$_ = $empty_list$;\n"
+  //  "}\n");
 
-  WriteFieldDocComment(printer, descriptor_);
-  printer->Print(variables_,
-    "private void add$capitalized_name$Bytes(\n"
-    "    com.google.protobuf.ByteString value) {\n"
-    "$null_check$");
-  if (CheckUtf8(descriptor_)) {
-    printer->Print(variables_,
-      "  checkByteStringIsUtf8(value);\n");
-  }
-  printer->Print(variables_,
-    "  ensure$capitalized_name$IsMutable();\n"
-    "  $name$_.add(value.toStringUtf8());\n"
-    "}\n");
+  //WriteFieldDocComment(printer, descriptor_);
+  //printer->Print(variables_,
+  //  "private void add$capitalized_name$Bytes(\n"
+  //  "    com.google.protobuf.ByteString value) {\n"
+  //  "$null_check$");
+  //if (CheckUtf8(descriptor_)) {
+  //  printer->Print(variables_,
+  //    "  checkByteStringIsUtf8(value);\n");
+  //}
+  //printer->Print(variables_,
+  //  "  ensure$capitalized_name$IsMutable();\n"
+  //  "  $name$_.add(value.toStringUtf8());\n"
+  //  "}\n");
 }
 
 void RepeatedImmutableStringFieldLiteGenerator::

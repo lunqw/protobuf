@@ -274,12 +274,12 @@ GenerateMembers(io::Printer* printer) const {
       "private com.google.protobuf.MapFieldLite<\n"
       "    $type_parameters$> $name$_ =\n"
       "        com.google.protobuf.MapFieldLite.emptyMapField();\n"
+      //"private com.google.protobuf.MapFieldLite<$type_parameters$>\n"
+      //"internalGet$capitalized_name$() {\n"
+      //"  return $name$_;\n"
+      //"}\n"
       "private com.google.protobuf.MapFieldLite<$type_parameters$>\n"
       "internalGet$capitalized_name$() {\n"
-      "  return $name$_;\n"
-      "}\n"
-      "private com.google.protobuf.MapFieldLite<$type_parameters$>\n"
-      "internalGetMutable$capitalized_name$() {\n"
       "  if (!$name$_.isMutable()) {\n"
       "    $name$_ = $name$_.mutableCopy();\n"
       "  }\n"
@@ -319,18 +319,18 @@ GenerateMembers(io::Printer* printer) const {
     //        "get$capitalized_name$() {\n"
     //        "  return get$capitalized_name$Map();\n"
     //        "}\n");
-    WriteFieldDocComment(printer, descriptor_);
-    printer->Print(
-        variables_,
-        "$deprecation$\n"
-        "public java.util.Map<$boxed_key_type$, $value_enum_type$>\n"
-        "get$capitalized_name$Map() {\n"
-        "  return java.util.Collections.unmodifiableMap(\n"
-        "      new com.google.protobuf.Internal.MapAdapter<\n"
-        "        $boxed_key_type$, $value_enum_type$, java.lang.Integer>(\n"
-        "            internalGet$capitalized_name$(),\n"
-        "            $name$ValueConverter));\n"
-        "}\n");
+    //WriteFieldDocComment(printer, descriptor_);
+    //printer->Print(
+    //    variables_,
+    //    "$deprecation$\n"
+    //    "public java.util.Map<$boxed_key_type$, $value_enum_type$>\n"
+    //    "get$capitalized_name$Map() {\n"
+    //    "  return java.util.Collections.unmodifiableMap(\n"
+    //    "      new com.google.protobuf.Internal.MapAdapter<\n"
+    //    "        $boxed_key_type$, $value_enum_type$, java.lang.Integer>(\n"
+    //    "            internalGet$capitalized_name$(),\n"
+    //    "            $name$ValueConverter));\n"
+    //    "}\n");
   //    WriteFieldDocComment(printer, descriptor_);
   //    printer->Print(
   //        variables_,
@@ -416,14 +416,14 @@ GenerateMembers(io::Printer* printer) const {
     //        "public java.util.Map<$type_parameters$> get$capitalized_name$() {\n"
     //        "  return get$capitalized_name$Map();\n"
     //        "}\n");
-    WriteFieldDocComment(printer, descriptor_);
-    printer->Print(
-        variables_,
-        "$deprecation$\n"
-        "public java.util.Map<$type_parameters$> get$capitalized_name$Map() {\n"
-        "  return java.util.Collections.unmodifiableMap(\n"
-        "      internalGet$capitalized_name$());\n"
-        "}\n");
+    //WriteFieldDocComment(printer, descriptor_);
+    //printer->Print(
+    //    variables_,
+    //    "$deprecation$\n"
+    //    "public java.util.Map<$type_parameters$> get$capitalized_name$Map() {\n"
+    //    "  return java.util.Collections.unmodifiableMap(\n"
+    //    "      internalGet$capitalized_name$());\n"
+    //    "}\n");
   //    WriteFieldDocComment(printer, descriptor_);
   //    printer->Print(
   //        variables_,
@@ -458,10 +458,10 @@ GenerateMembers(io::Printer* printer) const {
     printer->Print(
         variables_,
         "public java.util.Map<$boxed_key_type$, $value_enum_type$>\n"
-        "getMutable$capitalized_name$Map() {\n"
+        "get$capitalized_name$Map() {\n"
         "  return new com.google.protobuf.Internal.MapAdapter<\n"
         "      $boxed_key_type$, $value_enum_type$, java.lang.Integer>(\n"
-        "          internalGetMutable$capitalized_name$(),\n"
+        "          internalGet$capitalized_name$(),\n"
         "          $name$ValueConverter);\n"
         "}\n");
   //    if (SupportUnknownEnumValue(descriptor_->file())) {
@@ -478,8 +478,8 @@ GenerateMembers(io::Printer* printer) const {
     printer->Print(
         variables_,
         "public java.util.Map<$type_parameters$>\n"
-        "getMutable$capitalized_name$Map() {\n"
-        "  return internalGetMutable$capitalized_name$();\n"
+        "get$capitalized_name$Map() {\n"
+        "  return internalGet$capitalized_name$();\n"
         "}\n");
   }
 }
